@@ -1,0 +1,15 @@
+1.终端优化：修改 .bashrc 文件，为常用指令设置 alias （别名），并注释说明其原理
+    (1) 修改.bashrc文件并设置别名 mp='mkdir -p '（修改.bashrc+alias.png）
+    (2) source ~/.bashrc，使生效
+
+2.避障功能开发：在仿真器代码中增加 obstacle_pos 变量，实现检测到障碍物自动停止的逻辑，并打印警告日志；增加可视化输出功能
+    (1) obstacle_pos变量值在[10,30)范围内
+    (2) 检测到障碍物自动停止逻辑，详见main.py
+    (3) 终端日志：仿真器避障运行终端日志.png
+    (4) 使用matplotlib绘制前行轨迹（纵坐标值固定为1，仿真机器人轨迹可视化.png）
+
+3.版本控制：初始化 Git 仓库，将上述代码 Commit 并推送到 Gitee / Github
+    (1) 已提交到github
+
+4. 交付：上传提交git地址
+    (1) https://github.com/acodeur/robot-course-practice/tree/main/%E4%BA%BA%E5%BD%A2%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5%E8%AF%BE(2025%E5%B9%B41%E6%9C%9F)/%E4%B8%80%E3%80%81%E8%AF%BE%E7%A8%8B%E5%AF%BC%E8%AE%BA%E4%B8%8E%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/%E4%BD%9C%E4%B8%9A1.2
