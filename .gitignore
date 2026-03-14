@@ -5,3 +5,25 @@ out
 gen
 
 .venv
+
+**/build
+**/devel
+
+**/dist
+**/__pycache__
+**/*.egg-info
+*.egg
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.bak
+*.swp
+*.tmp
+*.DS_Store
+*.vscode
+*.env
+.env.*
+*.coveragerc
+.coverage
+.coverage.*
