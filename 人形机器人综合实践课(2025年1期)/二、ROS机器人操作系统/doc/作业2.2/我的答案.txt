@@ -1,0 +1,32 @@
+1.开环轨迹控制：编写一个Python发布者节点，让小海龟自主走一个图形，实现分析思路，提交运行结果
+
+（1）代码参见github：https://github.com/acodeur/robot-course-practice/blob/main/人形机器人综合实践课(2025年1期)/二、ROS机器人操作系统/作业2.2/src/turtle_gain_open_ctl/src/trace_ctl.py
+（2）小海龟自主走等边三角形：
+	1. 设置固定线速度、角速度为零，沿一方向移动，直到运动距离超过三角形边长
+	2. 设置固定角速度、线速度为零，原地旋转，直到旋转超过120度
+	3. 循环以上两步
+（3）运行结果参见github或zip包：
+	github：https://github.com/acodeur/robot-course-practice/blob/main/人形机器人综合实践课(2025年1期)/二、ROS机器人操作系统/doc/作业2.2/开环轨迹跟踪-小海龟轨迹.png
+	github：https://github.com/acodeur/robot-course-practice/blob/main/人形机器人综合实践课(2025年1期)/二、ROS机器人操作系统/doc/作业2.2/开环轨迹跟踪-前进与旋转日志输出.png
+
+2.闭环轨迹控制：在开环轨迹控制基础上，自学闭环控制方式，订阅小海龟位姿数据，闭环控制小海龟移动，给出思考和开环-闭环对比结果
+
+（1）代码参见github： https://github.com/acodeur/robot-course-practice/blob/main/人形机器人综合实践课(2025年1期)/二、ROS机器人操作系统/作业2.2/src/turtle_gain_close_ctl/src/trace_ctl.py
+（2）实现思路：
+	1. 订阅/turtle1/pose获取小海龟的实时位姿，同时反馈采用比例控制器
+	2. 计算同三角形某个顶点的距离和角度，若距离大于设定阈值，则沿顶点方向移动；小于阈值则原地旋转
+	3. 重复以上两步，完成其他顶点的到达
+（3）运行结果参见github或zip包：
+	github：https://github.com/acodeur/robot-course-practice/blob/main/人形机器人综合实践课(2025年1期)/二、ROS机器人操作系统/doc/作业2.2/闭环轨迹跟踪-小海龟轨迹.png
+	github：https://github.com/acodeur/robot-course-practice/blob/main/人形机器人综合实践课(2025年1期)/二、ROS机器人操作系统/doc/作业2.2/闭环轨迹跟踪-日志输出.png
+（4）开环-闭环对比结果参见github：
+	github：https://github.com/acodeur/robot-course-practice/blob/main/人形机器人综合实践课(2025年1期)/二、ROS机器人操作系统/doc/作业2.2/小海龟轨迹-开闭环结果对比.md
+
+3.版本控制：将上述代码Commit并推送到Gitee/Github
+
+已推送到Github
+
+4. 交付：上传提交git地址
+github地址：
+（1）文档：https://github.com/acodeur/robot-course-practice/tree/main/人形机器人综合实践课(2025年1期)/二、ROS机器人操作系统/doc/作业2.2
+（2）代码：https://github.com/acodeur/robot-course-practice/tree/main/人形机器人综合实践课(2025年1期)/二、ROS机器人操作系统/作业2.2
