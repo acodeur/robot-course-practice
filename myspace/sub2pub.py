@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# subscriber to publisherl
+# subscriber to publisher
 
 import rospy
 from geometry_msgs.msg import Twist
