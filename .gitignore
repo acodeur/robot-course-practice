@@ -9,6 +9,8 @@ gen
 **/build
 **/devel
 
+test
+
 **/dist
 **/__pycache__
 **/*.egg-info
