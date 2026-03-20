@@ -1,0 +1,38 @@
+<root name="simple_arm">
+    <!-- 定义颜色，用于rviz显示 -->
+    <materil name="blue">
+        <color rgba="0 0 0.8 1"/>
+    </materil>
+    <material name="red">
+        <color rgba="0.8 0 0 1"/>
+    </material>
+    <!-- 基座 -->
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.4" radius="0.05"/>
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.4" radius="0.05"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1.0"/>
+            <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+        </inertial>
+    </link>
+    <!-- 连杆1 -->
+    <link name="link_1">
+        <visual>
+            <geometry>
+                <box size="0.4 0.1 0.1"/>
+            </geometry>
+
+        </visual>
+    </link>
+    <joint name="joint_1">
+
+    </joint>
+</root>
