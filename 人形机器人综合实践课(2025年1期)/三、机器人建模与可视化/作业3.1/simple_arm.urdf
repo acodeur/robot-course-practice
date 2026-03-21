@@ -1,8 +1,8 @@
-<root name="simple_arm">
+<robot name="simple_arm">
     <!-- 定义颜色，用于rviz显示 -->
-    <materil name="blue">
+    <material name="blue">
         <color rgba="0 0 0.8 1"/>
-    </materil>
+    </material>
     <material name="red">
         <color rgba="0.8 0 0 1"/>
     </material>
@@ -10,29 +10,63 @@
     <link name="base_link">
         <visual>
             <geometry>
-                <cylinder length="0.4" radius="0.05"/>
+                <cylinder length="0.1" radius="0.2"/>
             </geometry>
+            <material name="blue"/>
         </visual>
         <collision>
             <geometry>
-                <cylinder length="0.4" radius="0.05"/>
+                <cylinder length="0.1" radius="0.2"/>
             </geometry>
         </collision>
-        <inertial>
-            <mass value="1.0"/>
-            <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
-        </inertial>
     </link>
     <!-- 连杆1 -->
     <link name="link_1">
         <visual>
             <geometry>
-                <box size="0.4 0.1 0.1"/>
+                <box size="0.1 0.1 0.4"/>
             </geometry>
-
+            <origin xyz="0 0 0.2" rpy="0 0 0"/>
+            <material name="red"/>
         </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.1 0.4"/>
+            </geometry>
+            <origin xyz="0 0 0.2" />
+        </collision>
     </link>
-    <joint name="joint_1">
-
+    <!-- 节点1（连接基座和连杆1） -->
+    <joint name="joint_1" type="revolute">
+        <parent link="base_link" />
+        <child link="link_1" />
+        <origin xyz="0 0 0.05" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+        <limit lower="-1.0" upper="1.0" effort="10" velocity="1"/>
     </joint>
-</root>
+    <!-- 连杆2 -->
+    <link name="link_2">
+        <visual>
+            <origin xyz="0 0 0.15" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="0.05" length="0.3" />
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0.15" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="0.05" length="0.3" />
+            </geometry>
+        </collision>
+    </link>
+    <!-- 节点2（连接连杆1和连杆2） -->
+    <joint name="joint_2" type="revolute">
+        <parent link="link_1" />
+        <child link="link_2" />
+        <origin xyz="0 0 0.4" rpy="0 0 0" />
+        <axis xyz="1 0 0" />
+        <limit lower="-1.0" upper="1.0" effort="10" velocity="1"/>
+    </joint>
+
+</robot>
