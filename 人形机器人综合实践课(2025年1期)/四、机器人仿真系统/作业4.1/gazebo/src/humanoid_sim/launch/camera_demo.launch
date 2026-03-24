@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<launch>
+  <!--
+    传感器演示 launch：零重力世界（含彩色物体）+ 带相机的人形机器人
+  -->
+
+  <!-- 启动 Gazebo（带彩色物体的世界） -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find humanoid_sim)/worlds/camera_demo.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+  </include>
+
+  <!-- 设置零重力（防止 dynamic reconfigure 覆盖 world 文件的设置） -->
+  <node name="set_zero_gravity" pkg="rosservice" type="rosservice"
+        args="call --wait /gazebo/set_physics_properties
+          '{time_step: 0.001, max_update_rate: 1000.0,
+            gravity: {x: 0.0, y: 0.0, z: 0.0},
+            ode_config: {auto_disable_bodies: false,
+              sor_pgs_precon_iters: 0, sor_pgs_iters: 50,
+              sor_pgs_w: 1.3, sor_pgs_rms_error_tol: 0.0,
+              contact_surface_layer: 0.001,
+              contact_max_correcting_vel: 100.0,
+              cfm: 0.0, erp: 0.2, max_contacts: 20}}'"
+        output="screen"/>
+
+  <!-- 加载带相机的 URDF -->
+  <param name="robot_description"
+         textfile="$(find humanoid_sim)/urdf/humanoid_with_camera.urdf"/>
+
+  <!-- 机器人状态发布器 -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher"
+        type="robot_state_publisher" output="screen"/>
+
+  <!-- 生成机器人（延迟 2 秒，等待零重力设置完成） -->
+  <node name="spawn_model" pkg="gazebo_ros" type="spawn_model"
+        args="-urdf -model humanoid -param robot_description"
+        launch-prefix="bash -c 'sleep 2; $0 $@' "
+        output="screen"/>
+
+</launch>
+
