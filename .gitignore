@@ -6,8 +6,8 @@ gen
 
 .venv
 
-**/build
-**/devel
+*/**/build
+*/**/devel
 
 test
 

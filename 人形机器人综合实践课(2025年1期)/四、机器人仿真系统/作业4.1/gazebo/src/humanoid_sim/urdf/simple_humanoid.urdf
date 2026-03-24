@@ -1,0 +1,383 @@
+<?xml version="1.0"?>
+<robot name="simple_humanoid">
+
+  <!-- ==================== 世界根链接 ==================== -->
+  <!-- base_link 位于地面，脚底与地面齐平 -->
+  <link name="base_link"/>
+
+  <joint name="base_to_torso" type="fixed">
+    <parent link="base_link"/>
+    <child link="torso"/>
+    <!-- 脚底在 torso 坐标系下为 z≈-0.625，抬高 0.625m 使脚底刚好在 z=0 -->
+    <origin xyz="0 0 0.625" rpy="0 0 0"/>
+  </joint>
+
+  <!-- 基础材质 -->
+  <material name="blue">
+    <color rgba="0.2 0.2 0.8 1.0"/>
+  </material>
+  <material name="grey">
+    <color rgba="0.5 0.5 0.5 1.0"/>
+  </material>
+  <material name="white">
+    <color rgba="0.9 0.9 0.9 1.0"/>
+  </material>
+
+  <!-- ==================== 躯干 ==================== -->
+  <link name="torso">
+    <visual>
+      <geometry>
+        <box size="0.2 0.15 0.4"/>
+      </geometry>
+      <origin xyz="0 0 0.2" rpy="0 0 0"/>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.2 0.15 0.4"/>
+      </geometry>
+      <origin xyz="0 0 0.2" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="5.0"/>
+      <origin xyz="0 0 0.2" rpy="0 0 0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <!-- ==================== 头部 ==================== -->
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+      <origin xyz="0 0 0.08" rpy="0 0 0"/>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+      <origin xyz="0 0 0.08" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 0.08" rpy="0 0 0"/>
+      <inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/>
+    </inertial>
+  </link>
+
+  <joint name="head_joint" type="fixed">
+    <parent link="torso"/>
+    <child link="head"/>
+    <origin xyz="0 0 0.4" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ==================== 左臂 ==================== -->
+  <link name="left_upper_arm">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.03"/>
+      </geometry>
+      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.03"/>
+      </geometry>
+      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <joint name="left_shoulder_pitch" type="revolute">
+    <parent link="torso"/>
+    <child link="left_upper_arm"/>
+    <origin xyz="0.13 0 0.35" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-1.57" upper="1.57" effort="10" velocity="1.0"/>
+  </joint>
+
+  <link name="left_forearm">
+    <visual>
+      <geometry>
+        <cylinder length="0.18" radius="0.025"/>
+      </geometry>
+      <origin xyz="0 0 -0.09" rpy="0 0 0"/>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.18" radius="0.025"/>
+      </geometry>
+      <origin xyz="0 0 -0.09" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <origin xyz="0 0 -0.09" rpy="0 0 0"/>
+      <inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.0005"/>
+    </inertial>
+  </link>
+
+  <joint name="left_elbow" type="revolute">
+    <parent link="left_upper_arm"/>
+    <child link="left_forearm"/>
+    <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-2.0" upper="0" effort="10" velocity="1.0"/>
+  </joint>
+
+  <!-- ==================== 右臂 ==================== -->
+  <link name="right_upper_arm">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.03"/>
+      </geometry>
+      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.03"/>
+      </geometry>
+      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <joint name="right_shoulder_pitch" type="revolute">
+    <parent link="torso"/>
+    <child link="right_upper_arm"/>
+    <origin xyz="-0.13 0 0.35" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-1.57" upper="1.57" effort="10" velocity="1.0"/>
+  </joint>
+
+  <link name="right_forearm">
+    <visual>
+      <geometry>
+        <cylinder length="0.18" radius="0.025"/>
+      </geometry>
+      <origin xyz="0 0 -0.09" rpy="0 0 0"/>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.18" radius="0.025"/>
+      </geometry>
+      <origin xyz="0 0 -0.09" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <origin xyz="0 0 -0.09" rpy="0 0 0"/>
+      <inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.0005"/>
+    </inertial>
+  </link>
+
+  <joint name="right_elbow" type="revolute">
+    <parent link="right_upper_arm"/>
+    <child link="right_forearm"/>
+    <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-2.0" upper="0" effort="10" velocity="1.0"/>
+  </joint>
+
+  <!-- ==================== 左腿 ==================== -->
+  <link name="left_thigh">
+    <visual>
+      <geometry>
+        <box size="0.08 0.08 0.3"/>
+      </geometry>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.08 0.08 0.3"/>
+      </geometry>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <inertia ixx="0.02" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.005"/>
+    </inertial>
+  </link>
+
+  <joint name="left_hip_pitch" type="revolute">
+    <parent link="torso"/>
+    <child link="left_thigh"/>
+    <origin xyz="0.06 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-1.57" upper="1.57" effort="20" velocity="1.0"/>
+  </joint>
+
+  <link name="left_shin">
+    <visual>
+      <geometry>
+        <box size="0.06 0.06 0.3"/>
+      </geometry>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.06 0.06 0.3"/>
+      </geometry>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.8"/>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <inertia ixx="0.015" ixy="0" ixz="0" iyy="0.015" iyz="0" izz="0.003"/>
+    </inertial>
+  </link>
+
+  <joint name="left_knee" type="revolute">
+    <parent link="left_thigh"/>
+    <child link="left_shin"/>
+    <origin xyz="0 0 -0.3" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0" upper="2.0" effort="20" velocity="1.0"/>
+  </joint>
+
+  <link name="left_foot">
+    <visual>
+      <geometry>
+        <box size="0.1 0.15 0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.15 0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.002" iyz="0" izz="0.002"/>
+    </inertial>
+  </link>
+
+  <joint name="left_ankle" type="fixed">
+    <parent link="left_shin"/>
+    <child link="left_foot"/>
+    <origin xyz="0 0 -0.3" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ==================== 右腿 ==================== -->
+  <link name="right_thigh">
+    <visual>
+      <geometry>
+        <box size="0.08 0.08 0.3"/>
+      </geometry>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.08 0.08 0.3"/>
+      </geometry>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <inertia ixx="0.02" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.005"/>
+    </inertial>
+  </link>
+
+  <joint name="right_hip_pitch" type="revolute">
+    <parent link="torso"/>
+    <child link="right_thigh"/>
+    <origin xyz="-0.06 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-1.57" upper="1.57" effort="20" velocity="1.0"/>
+  </joint>
+
+  <link name="right_shin">
+    <visual>
+      <geometry>
+        <box size="0.06 0.06 0.3"/>
+      </geometry>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.06 0.06 0.3"/>
+      </geometry>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.8"/>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <inertia ixx="0.015" ixy="0" ixz="0" iyy="0.015" iyz="0" izz="0.003"/>
+    </inertial>
+  </link>
+
+  <joint name="right_knee" type="revolute">
+    <parent link="right_thigh"/>
+    <child link="right_shin"/>
+    <origin xyz="0 0 -0.3" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0" upper="2.0" effort="20" velocity="1.0"/>
+  </joint>
+
+  <link name="right_foot">
+    <visual>
+      <geometry>
+        <box size="0.1 0.15 0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.15 0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.002" iyz="0" izz="0.002"/>
+    </inertial>
+  </link>
+
+  <joint name="right_ankle" type="fixed">
+    <parent link="right_shin"/>
+    <child link="right_foot"/>
+    <origin xyz="0 0 -0.3" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ==================== Gazebo扩展 ==================== -->
+  <gazebo reference="torso">
+    <material>Gazebo/Blue</material>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+  </gazebo>
+
+  <gazebo reference="left_foot">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
+
+  <gazebo reference="right_foot">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
+
+</robot>
