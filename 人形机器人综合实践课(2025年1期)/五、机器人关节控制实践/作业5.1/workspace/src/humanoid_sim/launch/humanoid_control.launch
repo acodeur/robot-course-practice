@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+  ========================================
+  第五讲：ros_control 演示启动文件
+  ========================================
+  功能：
+    1. 启动 Gazebo 仿真环境（有重力）
+    2. 加载人形机器人 URDF
+    3. 启动 ros_control 控制器
+    4. 机器人自动站立
+
+  使用方法：
+    roslaunch humanoid_sim humanoid_control.launch
+-->
+
+<launch>
+
+  <!-- ==================== 启动 Gazebo ==================== -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!-- ==================== 加载 URDF ==================== -->
+  <!-- 将 URDF 文件内容加载到参数服务器 -->
+  <param name="robot_description"
+         textfile="$(find humanoid_sim)/urdf/humanoid_with_control.urdf"/>
+
+  <!-- ==================== robot_state_publisher ==================== -->
+  <!-- 发布 TF 变换树 -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher"
+        type="robot_state_publisher">
+    <param name="publish_frequency" value="50.0"/>
+  </node>
+
+  <!-- ==================== 启动控制器 ==================== -->
+  <!-- controller_spawner 会自动加载并启动指定的控制器 -->
+  <node name="controller_spawner" pkg="controller_manager"
+      type="spawner" output="screen" ns="/humanoid"
+        args="joint_state_controller position_controller"/>
+
+  <!-- ==================== 加载控制器参数 ==================== -->
+  <!-- 从 config/controllers.yaml 加载 PID 参数 -->
+  <rosparam file="$(find humanoid_sim)/config/controllers.yaml"
+      command="load" ns="/humanoid"/>
+
+  <!-- ==================== 生成机器人模型 ==================== -->
+  <!-- 在 Gazebo 中生成机器人 -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="-urdf -model humanoid -param robot_description"
+        output="screen"/>
+
+</launch>

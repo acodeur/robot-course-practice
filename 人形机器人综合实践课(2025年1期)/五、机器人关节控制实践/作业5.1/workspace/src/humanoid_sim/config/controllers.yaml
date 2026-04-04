@@ -1,0 +1,79 @@
+# ========================================
+# 第五讲：ros_control 控制器配置文件
+# ========================================
+
+# 必须的：关节状态控制器
+# 作用：发布所有关节数据到 /joint_states 话题
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50  # Hz - 发布频率
+
+# ========================================
+# 位置控制器 (Position Controllers)
+# ========================================
+# 作用：通过 PID 算法控制关节到达目标位置
+
+position_controller:
+  type: position_controllers/JointGroupPositionController
+  joints:
+    - left_shoulder_pitch
+    - right_shoulder_pitch
+    - left_elbow
+    - right_elbow
+    - left_hip_pitch
+    - right_hip_pitch
+    - left_knee
+    - right_knee
+
+  # PID 参数 (初始估算值,需要在仿真中调试)
+  # P (Proportional): 比例增益 - 决定响应速度
+  # I (Integral): 积分增益 - 消除稳态误差
+  # D (Derivative): 微分增益 - 抑制震荡
+  gains:
+    # 手臂关节 (较轻,响应快)
+    left_shoulder_pitch:
+      p: 1000.0
+      i: 0.0
+      d: 0.1
+    right_shoulder_pitch:
+      p: 1000.0
+      i: 0.0
+      d: 0.1
+    left_elbow:
+      p: 800.0
+      i: 0.0
+      d: 0.05
+    right_elbow:
+      p: 800.0
+      i: 0.0
+      d: 0.05
+
+    # 腿部关节 (较重,需要更大的力矩)
+    left_hip_pitch:
+      p: 1500.0
+      i: 0.0
+      d: 0.2
+    right_hip_pitch:
+      p: 1500.0
+      i: 0.0
+      d: 0.2
+    left_knee:
+      p: 1200.0
+      i: 0.0
+      d: 0.15
+    right_knee:
+      p: 1200.0
+      i: 0.0
+      d: 0.15
+
+# gazebo_ros_control 在该命名空间下读取每个关节的 PID
+gazebo_ros_control:
+  pid_gains:
+    left_shoulder_pitch: {p: 1000.0, i: 0.0, d: 0.1}
+    right_shoulder_pitch: {p: 1000.0, i: 0.0, d: 0.1}
+    left_elbow: {p: 800.0, i: 0.0, d: 0.05}
+    right_elbow: {p: 800.0, i: 0.0, d: 0.05}
+    left_hip_pitch: {p: 1500.0, i: 0.0, d: 0.2}
+    right_hip_pitch: {p: 1500.0, i: 0.0, d: 0.2}
+    left_knee: {p: 1200.0, i: 0.0, d: 0.15}
+    right_knee: {p: 1200.0, i: 0.0, d: 0.15}
