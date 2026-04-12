@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+  ========================================
+  第六讲：运动学验证启动文件
+  ========================================
+  基于第五讲 humanoid_control.launch，新增以下修改：
+    1. URDF 指向 humanoid_kinematics.urdf（含 left_hand / right_hand 末端标记）
+    2. robot_state_publisher 增加 remap，将 joint_states 重映射到
+       /humanoid/joint_states，解决命名空间不匹配导致 TF 树不完整的问题
+
+  修改说明（相对第五讲原始文件）：
+    - 第 29 行：URDF 路径从 humanoid_with_control.urdf 改为 humanoid_kinematics.urdf
+    - 第 35 行：新增 <remap from="joint_states" to="/humanoid/joint_states"/>
+
+  使用方法：
+    roslaunch humanoid_sim humanoid_kinematics.launch
+-->
+
+<launch>
+
+  <!-- ==================== 启动 Gazebo ==================== -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!-- ==================== 加载 URDF ==================== -->
+  <param name="robot_description"
+         textfile="$(find humanoid_sim)/urdf/humanoid_kinematics.urdf"/>
+
+  <!-- ==================== robot_state_publisher ==================== -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher"
+        type="robot_state_publisher">
+    <param name="publish_frequency" value="50.0"/>
+    <remap from="joint_states" to="/humanoid/joint_states"/>
+  </node>
+
+  <!-- ==================== 启动控制器 ==================== -->
+  <node name="controller_spawner" pkg="controller_manager"
+      type="spawner" output="screen" ns="/humanoid"
+        args="joint_state_controller position_controller"/>
+
+  <!-- ==================== 加载控制器参数 ==================== -->
+  <rosparam file="$(find humanoid_sim)/config/controllers.yaml"
+      command="load" ns="/humanoid"/>
+
+  <!-- ==================== 生成机器人模型 ==================== -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="-urdf -model humanoid -param robot_description"
+        output="screen"/>
+
+</launch>
