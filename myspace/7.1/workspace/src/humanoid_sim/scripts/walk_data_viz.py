@@ -71,46 +71,31 @@ def walk_data_viz(csv_file):
     # ---------- 关节协调关系分析 ----------
     print("\n===== 关节协调关系分析 =====")
 
-    # 1. hip_pitch 与 knee 的关系（以左腿为例）
+    # 1. hip_pitch与knee的关系（以左腿为例）
     hip_pitch = data['left_hip_pitch']
     knee = data['left_knee']
     # 互相关求滞后
-    corr = np.correlate(hip_pitch - hip_pitch.mean(),
-                        knee - knee.mean(),
-                        mode='full')
+    corr = np.correlate(hip_pitch - hip_pitch.mean(), knee - knee.mean(), mode='full')
     lag = np.argmax(corr) - (len(hip_pitch) - 1)
-    dt = time[1] - time[0] if len(time) > 1 else 0.02
-    print(f"1. 左腿 hip_pitch 与 knee 的曲线形状：")
-    print("    - 髋关节俯仰角（hip_pitch）增大时，大腿前摆；膝关节（knee）弯曲跟随。")
-    print("    - 二者的波形相似，但 knee 峰值滞后于 hip_pitch 峰值约 {:.1f} ms".format(lag * dt * 1000))
-    print("    - 原因：步态设计中，抬腿过程先抬起大腿（hip_pitch），随后膝部弯曲（knee）以缩短摆腿长度；下落时膝部先伸直，髋关节后落下。两者通过几何耦合联动。")
+    dt = 0.02
+    print("knee峰值滞后于hip_pitch峰值约{:.1f}ms".format(lag * dt * 1000))
 
     # 2. hip_roll 与 hip_pitch 的周期和相位差
     hip_roll = data['left_hip_roll']
     # 寻找峰值
     peaks_pitch, _ = find_peaks(hip_pitch)
     peaks_roll, _ = find_peaks(hip_roll)
-    if len(peaks_pitch) > 1 and len(peaks_roll) > 1:
-        T_pitch = np.mean(np.diff(time[peaks_pitch]))
-        T_roll = np.mean(np.diff(time[peaks_roll]))
-        print(f"2. hip_roll 与 hip_pitch 的周期关系：")
-        print(f"    - hip_pitch 周期 ≈ {T_pitch:.3f} s，对应步态周期（默认 1/1.7 ≈ 0.588 s）")
-        print(f"    - hip_roll 周期 ≈ {T_roll:.3f} s，是 hip_pitch 周期的 {T_roll/T_pitch:.1f} 倍")
-        print("    - 解释：躯干横向摆动（hip_roll）每两个步态周期完成一次完整左右摆动（频率减半），因此 hip_roll 周期是 hip_pitch 周期的 2 倍。相位差则取决于 swingPhase 参数（默认 0.25，即 hip_roll 滞后 hip_pitch 90°）。")
-    else:
-        print("2. hip_roll 周期分析：数据不足，建议延长录制时间。")
+    T_pitch = np.mean(np.diff(time[peaks_pitch]))
+    T_roll = np.mean(np.diff(time[peaks_roll]))
+    print(f"hip_pitch 周期 ≈ {T_pitch:.3f} s")
+    print(f"hip_roll 周期 ≈ {T_roll:.3f} s，是 hip_pitch 周期的 {T_roll/T_pitch:.1f} 倍")
 
-    # 3. 左右腿同名关节的关系（仍以 hip_pitch 为例）
+    # 3. 左右腿同名关节的关系（以 hip_pitch 为例）
     r_hip_pitch = data['right_hip_pitch']
-    l_r_corr = np.correlate(hip_pitch - hip_pitch.mean(),
-                            r_hip_pitch - r_hip_pitch.mean(),
-                            mode='full')
+    l_r_corr = np.correlate(hip_pitch - hip_pitch.mean(), r_hip_pitch - r_hip_pitch.mean(), mode='full')
     phase_shift = np.argmax(l_r_corr) - (len(hip_pitch) - 1)
     phase_frac = phase_shift / len(hip_pitch)
-    print(f"3. 左右腿同名关节（hip_pitch）的相位差：")
-    print(f"    - 左腿 hip_pitch 领先右腿 hip_pitch 约 {phase_shift} 个采样点，对应 {phase_frac:.2f} 个周期（即 {phase_frac*360:.0f}°）。")
-    print("    - 理论值应为 0.5 个周期（180°），实际由于非对称扰动可能略有偏差。")
-    print("    - 这种反相关系保证了机器人在行走时两腿交替向前，维持动态平衡。")
+    print(f"左腿 hip_pitch 领先右腿 hip_pitch 约 {phase_shift} 个采样点，对应 {phase_frac:.2f} 个周期（即 {phase_frac*360:.0f}°）。")
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
