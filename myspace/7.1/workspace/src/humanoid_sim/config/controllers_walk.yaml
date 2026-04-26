@@ -1,0 +1,91 @@
+# ========================================
+# 16 关节控制器配置
+# ========================================
+# 扩展至 16 个关节
+#   手臂：4 个关节
+#   腿部：12 个关节（6DOF × 2 腿）
+#
+# 关节命令数组顺序（Float64MultiArray data）：
+#   下标 0:  left_shoulder_pitch
+#   下标 1:  right_shoulder_pitch
+#   下标 2:  left_elbow
+#   下标 3:  right_elbow
+#   下标 4:  left_hip_yaw
+#   下标 5:  right_hip_yaw
+#   下标 6:  left_hip_roll
+#   下标 7:  right_hip_roll
+#   下标 8:  left_hip_pitch
+#   下标 9:  right_hip_pitch
+#   下标 10: left_knee
+#   下标 11: right_knee
+#   下标 12: left_ankle_pitch
+#   下标 13: right_ankle_pitch
+#   下标 14: left_ankle_roll
+#   下标 15: right_ankle_roll
+
+humanoid:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  position_controller:
+    type: position_controllers/JointGroupPositionController
+    joints:
+      - left_shoulder_pitch
+      - right_shoulder_pitch
+      - left_elbow
+      - right_elbow
+      - left_hip_yaw
+      - right_hip_yaw
+      - left_hip_roll
+      - right_hip_roll
+      - left_hip_pitch
+      - right_hip_pitch
+      - left_knee
+      - right_knee
+      - left_ankle_pitch
+      - right_ankle_pitch
+      - left_ankle_roll
+      - right_ankle_roll
+
+    gains:
+      # 手臂
+      left_shoulder_pitch:  {p: 1000.0, i: 0.0, d: 0.1}
+      right_shoulder_pitch: {p: 1000.0, i: 0.0, d: 0.1}
+      left_elbow:           {p: 800.0,  i: 0.0, d: 0.05}
+      right_elbow:          {p: 800.0,  i: 0.0, d: 0.05}
+      # 髋关节
+      left_hip_yaw:         {p: 1000.0, i: 0.0, d: 0.1}
+      right_hip_yaw:        {p: 1000.0, i: 0.0, d: 0.1}
+      left_hip_roll:        {p: 1000.0, i: 0.0, d: 0.1}
+      right_hip_roll:       {p: 1000.0, i: 0.0, d: 0.1}
+      left_hip_pitch:       {p: 1500.0, i: 0.0, d: 0.2}
+      right_hip_pitch:      {p: 1500.0, i: 0.0, d: 0.2}
+      # 膝关节
+      left_knee:            {p: 1500.0, i: 0.0, d: 0.15}
+      right_knee:           {p: 1500.0, i: 0.0, d: 0.15}
+      # 踝关节
+      left_ankle_pitch:     {p: 800.0,  i: 0.0, d: 0.1}
+      right_ankle_pitch:    {p: 800.0,  i: 0.0, d: 0.1}
+      left_ankle_roll:      {p: 500.0,  i: 0.0, d: 0.05}
+      right_ankle_roll:     {p: 500.0,  i: 0.0, d: 0.05}
+
+  # gazebo_ros_control 在该命名空间下读取每个关节的 PID
+  gazebo_ros_control:
+    pid_gains:
+      left_shoulder_pitch:  {p: 1000.0, i: 0.0, d: 0.1}
+      right_shoulder_pitch: {p: 1000.0, i: 0.0, d: 0.1}
+      left_elbow:           {p: 800.0,  i: 0.0, d: 0.05}
+      right_elbow:          {p: 800.0,  i: 0.0, d: 0.05}
+      left_hip_yaw:         {p: 1000.0, i: 0.0, d: 0.1}
+      right_hip_yaw:        {p: 1000.0, i: 0.0, d: 0.1}
+      left_hip_roll:        {p: 1000.0, i: 0.0, d: 0.1}
+      right_hip_roll:       {p: 1000.0, i: 0.0, d: 0.1}
+      left_hip_pitch:       {p: 1500.0, i: 0.0, d: 0.2}
+      right_hip_pitch:      {p: 1500.0, i: 0.0, d: 0.2}
+      left_knee:            {p: 1500.0, i: 0.0, d: 0.15}
+      right_knee:           {p: 1500.0, i: 0.0, d: 0.15}
+      left_ankle_pitch:     {p: 800.0,  i: 0.0, d: 0.1}
+      right_ankle_pitch:    {p: 800.0,  i: 0.0, d: 0.1}
+      left_ankle_roll:      {p: 500.0,  i: 0.0, d: 0.05}
+      right_ankle_roll:     {p: 500.0,  i: 0.0, d: 0.05}
