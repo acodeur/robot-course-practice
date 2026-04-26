@@ -1,0 +1,52 @@
+<launch>
+  <!-- ========================================
+    6DOF 腿部步态行走启动文件
+    ========================================
+    基于三次样条 + 6DOF 解析腿部关节求解的开环步态引擎。
+
+    关键说明：
+      1. URDF 路径指向 humanoid_walk.urdf（6DOF 步态参数版）
+      2. 机器人朝 +X 方向（X=前, Y=左, Z=上）
+      3. 腿部 6DOF/腿，关节轴约定匹配步态引擎
+      4. 保留 joint_states remap（修复 TF 树）
+  -->
+
+  <!-- 启动 Gazebo 空世界 -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find humanoid_sim)/worlds/empty.world"/>
+  </include>
+
+  <!-- 加载 URDF 到参数服务器 -->
+  <param name="robot_description"
+         command="$(find xacro)/xacro $(find humanoid_sim)/urdf/humanoid_walk.urdf" />
+
+  <!-- robot_state_publisher：发布 TF 变换 -->
+  <!-- remap 修复：让 robot_state_publisher 订阅正确的 joint_states 话题 -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <param name="publish_frequency" value="50.0"/>
+    <remap from="joint_states" to="/humanoid/joint_states"/>
+  </node>
+
+  <!-- 控制器参数加载到 /humanoid 命名空间 -->
+  <!-- rosparam 必须在 node 外部，否则会加载到节点的私有命名空间 /controller_spawner/humanoid/ -->
+  <rosparam file="$(find humanoid_sim)/config/controllers_walk.yaml" command="load"/>
+
+  <!-- 控制器 spawner -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+        args="--namespace=/humanoid joint_state_controller position_controller --timeout 120"/>
+
+  <!-- 在 Gazebo 中生成机器人模型 -->
+  <!--
+    spawn 高度：base_link 没有几何体，base_to_torso 把躯干抬到 z=0.27
+    腿部运动链总长 = 0.27，恰好等于 base_to_torso
+    因此 base_link 高度 = 脚底高度，spawn z≈0 即脚底触地
+    用 z=0.01 微小偏移避免碰撞穿透
+  -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+        args="-urdf -model humanoid -param robot_description -z 0.01"/>
+
+  <!-- RViz：可视化机器人模型 + TF 树，验证步态姿态 -->
+  <node name="rviz" pkg="rviz" type="rviz" respawn="false" output="screen"
+        args="-d $(find humanoid_sim)/config/walk.rviz"/>
+
+</launch>
