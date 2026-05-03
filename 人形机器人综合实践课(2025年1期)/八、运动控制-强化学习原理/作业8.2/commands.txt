@@ -1,0 +1,32 @@
+./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
+    --task=Isaac-Velocity-Flat-G1-v0 \
+    --num_envs=4096 \
+    --max_iterations=500 \
+    --headless \
+    --seed=42 \
+    --logger=tensorboard \
+    --experiment_name=g1_flat_baseline \
+    --run_name=feet_air_0.75
+
+./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
+    --task=Isaac-Velocity-Flat-G1-v0 \
+    --num_envs=4096 \
+    --max_iterations=500 \
+    --headless \
+    --seed=42 \
+    --logger=tensorboard \
+    --experiment_name=g1_flat_lowairtime \
+    --run_name=feet_air_0.35
+	
+
+./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py \
+    --task=Isaac-Velocity-Flat-G1-Play-v0 \
+	--num_envs=8 \
+    --checkpoint=logs/rsl_rl/g1_flat/2026-05-03_19-52-04_feet_air_0.75/model_499.pt
+	
+./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py \
+    --task=Isaac-Velocity-Flat-G1-Play-v0 \
+	--num_envs=8 \
+    --checkpoint=logs/rsl_rl/g1_flat/2026-05-03_08-59-27_feet_air_0.35/model_499.pt
+	
+	
