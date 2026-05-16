@@ -17,9 +17,11 @@ import cv2
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
-DEFAULT_IMAGE = HERE / "images" / "01_ball_clean.png"
+DEFAULT_IMAGE = HERE / "images" / "02_ball_floor_bg.png"
 
 # 橙色球的 HSV 默认范围 (OpenCV 约定: H ∈ [0,180], S/V ∈ [0,255])
+# HSV_LOWER = np.array([5, 120, 120], dtype=np.uint8)
+# HSV_UPPER = np.array([20, 255, 255], dtype=np.uint8)
 HSV_LOWER = np.array([5, 120, 120], dtype=np.uint8)
 HSV_UPPER = np.array([20, 255, 255], dtype=np.uint8)
 
@@ -147,8 +149,11 @@ def step4_hsv_mask(blurred: np.ndarray, out_dir: Path) -> np.ndarray:
 def step5_morphology(mask: np.ndarray, out_dir: Path) -> np.ndarray:
     print("\n[Step 5] 形态学: 开运算去碎屑, 闭运算补空洞")
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (9, 9))
-    opened = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-    closed = cv2.morphologyEx(opened, cv2.MORPH_CLOSE, kernel)
+    # opened = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+    # closed = cv2.morphologyEx(opened, cv2.MORPH_CLOSE, kernel)
+    closed = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+    opened = cv2.morphologyEx(closed, cv2.MORPH_OPEN, kernel)
+
     triple = np.hstack([mask, opened, closed])
     cv2.imshow("Step5 Raw | Opened | Closed", _fit(triple))
     cv2.imwrite(str(out_dir / "step5_mask_raw.png"), mask)
@@ -173,6 +178,8 @@ def step6_contour_centroid(img: np.ndarray, clean_mask: np.ndarray, out_dir: Pat
     m = cv2.moments(c)
     cx = int(m["m10"] / m["m00"]) if m["m00"] else x + w // 2
     cy = int(m["m01"] / m["m00"]) if m["m00"] else y + h // 2
+
+
     vis = img.copy()
     cv2.rectangle(vis, (x, y), (x + w, y + h), (0, 255, 0), 2)
     cv2.drawMarker(vis, (cx, cy), (0, 0, 255), cv2.MARKER_CROSS, 20, 2)
