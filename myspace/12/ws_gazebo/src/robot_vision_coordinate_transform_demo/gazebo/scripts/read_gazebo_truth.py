@@ -40,7 +40,8 @@ def write_truth(path, model_name, pose):
 def main():
     rospy.init_node("read_gazebo_truth", anonymous=True)
 
-    model_name = rospy.get_param("~model_name", "target_ball")
+    # model_name = rospy.get_param("~model_name", "target_ball")
+    model_name = rospy.get_param("~model_name", "green_reference_box")
     default_output = package_dir() / "gazebo_truth" / f"{model_name}_truth.yaml"
     output = Path(rospy.get_param("~output", str(default_output))).expanduser()
 

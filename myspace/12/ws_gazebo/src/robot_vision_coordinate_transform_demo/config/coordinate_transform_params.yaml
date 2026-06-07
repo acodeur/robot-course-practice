@@ -1,9 +1,13 @@
 # 第十二讲坐标计算参数。
 
+# target:
+#   model_name: "target_ball"
+#   real_height_m: 0.30
+#   center_height_robot_m: 1.0
+
 target:
-  model_name: "target_ball"
-  real_height_m: 0.30
-  center_height_robot_m: 1.0
+  model_name: "green_reference_box"
+  real_height_m: 0.22
 
 depth:
   # 推荐课堂主线：known_size。Gazebo 简化红球不是足球贴图，YOLO 可能不稳定。

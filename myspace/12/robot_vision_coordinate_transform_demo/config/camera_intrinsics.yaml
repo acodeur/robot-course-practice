@@ -1,9 +1,0 @@
-# Gazebo camera from humanoid_with_camera.urdf
-# width=640, height=480, horizontal_fov=1.047 rad
-image_width: 640
-image_height: 480
-fx: 554.38
-fy: 554.38
-cx: 320.0
-cy: 240.0
-note: "fx 由 width/(2*tan(horizontal_fov/2)) 近似得到；fy 课堂中按像素近似相等处理。"

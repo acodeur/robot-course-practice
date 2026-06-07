@@ -34,7 +34,7 @@ def detection_confidence(det):
         return 0.0
 
 
-def choose_detection(data):
+def choose_detection(data, prefer_class="sports ball"):
     detections = (data or {}).get("detections", [])
     if not detections:
         raise ValueError("没有检测框。")
@@ -52,17 +52,17 @@ def choose_detection(data):
         detail = " ".join(errors)
         raise ValueError(f"没有可用检测框。{detail}")
 
-    sports_balls = [
+    objects = [
         det for det in valid
-        if str(det.get("class_name", "")).strip().lower() == "sports ball"
+        if str(det.get("class_name", "")).strip().lower() == prefer_class
     ]
-    if sports_balls:
-        return max(sports_balls, key=detection_confidence)
+    if objects:
+        return max(objects, key=detection_confidence)
 
     return max(valid, key=detection_confidence)
 
 
-def load_detection(input_path, fallback_path):
+def load_detection(input_path, fallback_path, prefer_class="sports ball"):
     candidates = [("输入文件", input_path)]
     if fallback_path != input_path:
         candidates.append(("兜底文件", fallback_path))
@@ -74,7 +74,7 @@ def load_detection(input_path, fallback_path):
             continue
         try:
             data = load_yaml(path)
-            det = choose_detection(data)
+            det = choose_detection(data, prefer_class)
         except (KeyError, TypeError, ValueError) as exc:
             failures.append(f"{label}不可用: {path} ({exc})")
             continue
@@ -85,7 +85,7 @@ def load_detection(input_path, fallback_path):
 
     raise ValueError("无法获得有效 bbox。 " + "；".join(failures))
 
-
+# 获取目标像素坐标：中心点(u, v)，宽高(w, h)，以及类别和置信度等信息
 def compute_target_pixel(det):
     x1, y1, x2, y2 = [float(v) for v in det["bbox_xyxy"]]
     u = (x1 + x2) / 2.0
@@ -116,7 +116,8 @@ def main():
     fallback_path = Path(args.fallback)
 
     try:
-        data, det, source_path = load_detection(input_path, fallback_path)
+        # data, det, source_path = load_detection(input_path, fallback_path)
+        data, det, source_path = load_detection(input_path, fallback_path, "kite")
     except ValueError as exc:
         raise SystemExit(str(exc))
     result = compute_target_pixel(det)

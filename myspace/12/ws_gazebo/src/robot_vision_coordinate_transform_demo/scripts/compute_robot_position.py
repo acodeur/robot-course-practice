@@ -12,11 +12,11 @@ def package_root():
 def load_yaml(path):
     return yaml.safe_load(Path(path).read_text(encoding="utf-8"))
 
-
+# 简单的 3x3 矩阵和 3D 向量乘法
 def mat_vec_mul(mat, vec):
     return [sum(float(mat[i][j]) * float(vec[j]) for j in range(3)) for i in range(3)]
 
-
+# 简单的 3D 向量加法
 def add_vec(a, b):
     return [float(a[i]) + float(b[i]) for i in range(3)]
 
@@ -85,10 +85,12 @@ def main():
     else:
         Z = depth_from_ground_height(ray, extr, params)
 
+    # P_camera：目标中心点在相机坐标系下的坐标（含深度，X 右，Y 下，Z 前）
     P_camera = [ray[0] * Z, ray[1] * Z, Z]
-    R = extr["R_robot_camera"]
-    t = extr["t_robot_camera"]
-    t_vec = [float(t["x"]), float(t["y"]), float(t["z"])]
+    R = extr["R_robot_camera"] # 旋转矩阵：相机坐标系到机器人坐标系
+    t = extr["t_robot_camera"] # 平移向量：相机坐标系原点在机器人坐标系下的坐标
+    t_vec = [float(t["x"]), float(t["y"]), float(t["z"])] # 转换到机器人坐标系下的平移向量
+    # P_robot：目标中心点在机器人坐标系下的坐标（X 前，Y 左，Z 上）
     P_robot = add_vec(mat_vec_mul(R, P_camera), t_vec)
 
     truth = read_truth(args.truth)
