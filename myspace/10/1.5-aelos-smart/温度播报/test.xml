@@ -4,24 +4,7 @@
     <variable type="" id="^vr9LPnb.@X*s#Gk^TiG">温度值</variable>
     <variable type="" id="tv!9UD)u,f:.[e-4l0wP">数值</variable>
   </variables>
-  <block type="start" id="!JODDDpDPuBO86x3{r0}" deletable="false" x="-436" y="-381">
-    <statement name="do">
-      <block type="aelos_while" id="U3/3bI#Gd=.F0fK./8?O">
-        <value name="condition">
-          <block type="logic_boolean" id="n4WlGCzvol~4=8#nh)/l">
-            <field name="BOOL">TRUE</field>
-          </block>
-        </value>
-        <statement name="do">
-          <block type="io_out" id="LID]JuR6772/`!7jV!%g">
-            <field name="output_value">0</field>
-            <field name="port">2</field>
-          </block>
-        </statement>
-      </block>
-    </statement>
-  </block>
-  <block type="aelos_while" id="bnh^gBCdM;G$yy((]4s_" x="203" y="-405">
+  <block type="aelos_while" id="bnh^gBCdM;G$yy((]4s_" x="-72" y="-481">
     <value name="condition">
       <block type="logic_boolean" id="6s.Tu5D4,$[e115jg;@A">
         <field name="BOOL">TRUE</field>
@@ -461,6 +444,23 @@
             </statement>
           </block>
         </next>
+      </block>
+    </statement>
+  </block>
+  <block type="start" id="!JODDDpDPuBO86x3{r0}" deletable="false" x="-436" y="-381">
+    <statement name="do">
+      <block type="aelos_while" id="U3/3bI#Gd=.F0fK./8?O">
+        <value name="condition">
+          <block type="logic_boolean" id="n4WlGCzvol~4=8#nh)/l">
+            <field name="BOOL">TRUE</field>
+          </block>
+        </value>
+        <statement name="do">
+          <block type="io_out" id="LID]JuR6772/`!7jV!%g">
+            <field name="output_value">0</field>
+            <field name="port">2</field>
+          </block>
+        </statement>
       </block>
     </statement>
   </block>
