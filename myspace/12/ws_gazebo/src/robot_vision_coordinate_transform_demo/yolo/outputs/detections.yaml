@@ -1,0 +1,29 @@
+image: D:\code\xuetangx\robot-course-practice\myspace\12\gazebo_camera.png
+image_width: 640
+image_height: 480
+detections:
+- index: 0
+  class_name: frisbee
+  confidence: 0.489947
+  bbox_xyxy:
+  - 276.096
+  - 227.087
+  - 364.518
+  - 315.328
+- index: 1
+  class_name: sports ball
+  confidence: 0.475969
+  bbox_xyxy:
+  - 276.343
+  - 226.816
+  - 364.628
+  - 315.93
+- index: 2
+  class_name: kite
+  confidence: 0.362133
+  bbox_xyxy:
+  - 140.557
+  - 277.555
+  - 207.336
+  - 338.852
+

@@ -1,0 +1,17 @@
+class_name: kite
+confidence: 0.362133
+bbox_xyxy:
+- 140.557
+- 277.555
+- 207.336
+- 338.852
+target_pixel:
+  u: 173.94650000000001
+  v: 308.20349999999996
+bbox_size:
+  w: 66.77900000000002
+  h: 61.29699999999997
+image_width: 640
+image_height: 480
+source_yaml: /home/andrew/code/robot-course-practice/myspace/12/ws_gazebo/src/robot_vision_coordinate_transform_demo/yolo/outputs/detections.yaml
+selection_rule: 优先选择 class_name=sports ball；如果没有 sports ball，则选择置信度最高的有效检测框。

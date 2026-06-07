@@ -1,0 +1,23 @@
+# 第十二讲坐标计算参数。
+
+# target:
+#   model_name: "target_ball"
+#   real_height_m: 0.30
+#   center_height_robot_m: 1.0
+
+target:
+  model_name: "green_reference_box"
+  real_height_m: 0.22
+
+depth:
+  # 推荐课堂主线：known_size。Gazebo 简化红球不是足球贴图，YOLO 可能不稳定。
+  # 可选：fixed_z, ground_height
+  method: "known_size"
+  fixed_z_m: 2.0
+
+outputs:
+  target_pixel: "yolo/outputs/target_pixel.yaml"
+  camera_ray: "yolo/outputs/camera_ray.yaml"
+  coordinate_transform: "yolo/outputs/coordinate_transform_result.yaml"
+
+note: "known_size 使用检测框高度估距；ground_height 用目标中心高度约束求交，适合讲地面/高度约束直觉。"
