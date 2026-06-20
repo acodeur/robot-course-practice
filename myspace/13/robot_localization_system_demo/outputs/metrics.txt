@@ -2,9 +2,9 @@ Robot localization demo metrics
 
 Final true pose:      x=9.000, y=3.500, theta=0.232
 Final odometry pose:  x=9.271, y=3.806, theta=0.269
-Final PF pose:        x=9.010, y=3.491, theta=0.229
+Final PF pose:        x=9.048, y=3.530, theta=0.221
 
 Mean odometry error:  0.211 m
-Mean PF error:        0.044 m
+Mean PF error:        0.097 m
 Final odometry error: 0.409 m
-Final PF error:       0.013 m
+Final PF error:       0.056 m

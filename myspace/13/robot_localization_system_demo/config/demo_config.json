@@ -5,7 +5,7 @@
   "num_particles": 400,
   "map_size": [10.0, 7.0],
   "landmarks": [[1.0, 1.0], [2.0, 5.8], [5.5, 1.2], [7.2, 5.5], [9.0, 2.0]],
-  "sensor_range": 4.2,
+  "sensor_range": 2.1,
   "initialization": {
     "position_std": 0.45,
     "theta_std": 0.35,
@@ -17,8 +17,8 @@
     "drift_per_step": 0.002
   },
   "observation_noise": {
-    "range_std": 0.15,
-    "bearing_std": 0.08
+    "range_std": 0.30,
+    "bearing_std": 0.16
   },
   "animation": {
     "pause": 0.03
