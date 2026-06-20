@@ -1,0 +1,73 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="$M2eJtskF(pjpuToJ;~q">手柄按键值</variable>
+  </variables>
+  <block type="start" id="!JODDDpDPuBO86x3{r0}" deletable="false" x="499" y="-62">
+    <statement name="do">
+      <block type="aelos_while" id="E.zj`?:x5aP+Tb.+0AMU">
+        <value name="condition">
+          <block type="logic_boolean" id="thWw!yer]b*Be5){RWvK">
+            <field name="BOOL">TRUE</field>
+          </block>
+        </value>
+        <statement name="do">
+          <block type="remote_control" id="qVO}Oh[H~qHgA=CVg+@+">
+            <value name="variable">
+              <block type="variables_get" id="!JXoXbNx9v}hx6}YWS8S">
+                <field name="VAR" id="$M2eJtskF(pjpuToJ;~q" variabletype="">手柄按键值</field>
+              </block>
+            </value>
+            <next>
+              <block type="aelos_if" id="FzOox~Fsa/KXf}Dd$m=S">
+                <value name="condition">
+                  <block type="aelos_compare" id="K:I{deI2ytyxEDKN9N,R">
+                    <field name="OP">JNE</field>
+                    <value name="input_1">
+                      <block type="variables_get" id="O][g7%{@L7[)vS{i97|A">
+                        <field name="VAR" id="$M2eJtskF(pjpuToJ;~q" variabletype="">手柄按键值</field>
+                      </block>
+                    </value>
+                    <value name="input_2">
+                      <block type="remote_control_button" id="[qCJkZ}T0B4Cavd#N2}+">
+                        <field name="mode">Perform</field>
+                        <field name="key">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="do">
+                  <block type="Take_three_slow_steps_forward" id="cTAKZ(6SCX8;UYWFn-~3">
+                    <next>
+                      <block type="Pan_left_1_step" id="@ofb/!)GD~|:7,@ZAT_7">
+                        <next>
+                          <block type="Pan_right_1_step" id="0ff?Lw/{Ut;X}`#7m4cv">
+                            <next>
+                              <block type="Take_a_slow_step_backward" id="3N/kF9)(F?o(T93Bjk*m">
+                                <next>
+                                  <block type="Take_a_slow_step_backward" id="^KZLE-lyW^AMPUGP4=xP">
+                                    <next>
+                                      <block type="Take_a_slow_step_backward" id="]or/2=^{jcu_BM1}m~%y">
+                                        <next>
+                                          <block type="loop" id="^u9aQP/*_w_tgf-!^b+}"></block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="repeat_until" id="0G!bu#o|h@ESn8%Tb!H{" x="511" y="128"></block>
+</xml>
