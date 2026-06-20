@@ -1,0 +1,26 @@
+{
+  "random_seed": 13,
+  "steps": 220,
+  "dt": 0.1,
+  "num_particles": 400,
+  "map_size": [10.0, 7.0],
+  "landmarks": [[1.0, 1.0], [2.0, 5.8], [5.5, 1.2], [7.2, 5.5], [9.0, 2.0]],
+  "sensor_range": 4.2,
+  "initialization": {
+    "position_std": 0.45,
+    "theta_std": 0.35,
+    "global_fraction": 0.15
+  },
+  "motion_noise": {
+    "v_std": 0.05,
+    "w_std": 0.04,
+    "drift_per_step": 0.002
+  },
+  "observation_noise": {
+    "range_std": 0.15,
+    "bearing_std": 0.08
+  },
+  "animation": {
+    "pause": 0.03
+  }
+}
