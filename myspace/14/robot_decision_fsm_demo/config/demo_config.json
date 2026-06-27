@@ -1,0 +1,57 @@
+{
+  "random_seed": 14,
+  "dt": 0.08,
+  "max_steps": 3600,
+  "field": {
+    "width_m": 9.0,
+    "height_m": 6.0,
+    "goal_x_m": 4.25,
+    "goal_width_m": 1.4
+  },
+  "robot": {
+    "start_pose": [-1.6, -1.0, 0.0],
+    "radius_m": 0.18,
+    "move_speed_mps": 0.28,
+    "turn_speed_degps": 55.0,
+    "search_turn_degps": 28.0
+  },
+  "ball": {
+    "radius_m": 0.11,
+    "kick_speed_mps": 0.22,
+    "ball_friction_mps2": 0.03,
+    "stop_speed_mps": 0.05,
+    "max_roll_distance_m": 2.8,
+    "kick_angle_noise_deg": 0.0,
+    "kick_speed_noise_ratio": 0.0
+  },
+  "perception": {
+    "sensor_range_m": 6.0,
+    "fov_deg": 360.0,
+    "confidence_threshold": 0.55,
+    "dropout_probability": 0.0,
+    "noise_std": 0.04,
+    "manual_dropout_frames": 80
+  },
+  "decision": {
+    "approach_distance_m": 1.05,
+    "shoot_pose_distance_m": 0.62,
+    "shoot_pose_tolerance_m": 0.12,
+    "kick_distance_m": 0.78,
+    "align_angle_threshold_deg": 7.0,
+    "lost_frame_limit": 18,
+    "recover_frames": 36,
+    "kick_frames": 1,
+    "kick_cooldown_frames": 28
+  },
+  "scenario": {
+    "ball_positions": [[2.15, 0.0], [2.05, 0.45], [2.05, -0.45]],
+    "reset_after_goal": true
+  },
+  "ui": {
+    "width": 1600,
+    "height": 1000,
+    "fps": 60,
+    "initial_speed": 1.0,
+    "phase_pause_seconds": 1.5
+  }
+}

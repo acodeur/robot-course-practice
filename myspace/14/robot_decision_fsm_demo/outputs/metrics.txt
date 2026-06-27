@@ -1,0 +1,19 @@
+robot_decision_fsm_demo metrics
+agent_state: APPROACH_BALL
+last_command: MOVE_TO_BALL
+score: 2
+kick_count: 6
+last_shot_angle_error_deg: -4.2758979815850875
+last_goal_time: 271.6000000000145
+sim_time: 288.00
+robot_pose: x=0.903, y=-0.623, theta=8.6
+ball_position: x=2.050, y=-0.450
+ball_speed: 0.000
+recent_events:
+  244.1s  state -> GET_BEHIND_BALL: close enough, move behind ball
+  252.5s  state -> ALIGN_TO_GOAL: at shoot pose, align to ball-goal line
+  259.8s  state -> KICK: aligned with ball-goal line
+  267.1s  kick! error=-4.3 deg
+  271.6s  goal! score=2, time=271.6s
+  271.6s  next penalty setup
+  271.7s  state -> APPROACH_BALL: ball visible with enough confidence
