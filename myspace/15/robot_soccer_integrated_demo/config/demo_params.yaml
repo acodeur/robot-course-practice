@@ -1,0 +1,99 @@
+cmd_vel_adapter:
+  rate_hz: 50.0
+  cmd_timeout: 0.5
+  max_linear_x: 0.25
+  max_linear_y: 0.08
+  max_angular_z: 0.8
+  base_z: 0.0
+  step_gain: 0.020
+  lateral_gain: 0.018
+  turn_gain: 0.20
+  rise_gain: 0.035
+  swing_gain: 0.020
+  trunk_pitch: 0.05
+  trunk_z_offset: 0.02
+
+head_pitch_controller:
+  rate_hz: 20.0
+  default_yaw: 0.0
+  default_pitch: 0.45
+  min_yaw: -1.0
+  max_yaw: 1.0
+  min_pitch: -0.35
+  max_pitch: 0.75
+  yaw_gain: 0.035
+  pitch_gain: 0.030
+  return_gain: 0.02
+  detection_timeout: 0.5
+  yaw_command_topic: /humanoid/head_yaw_controller/command
+  pitch_command_topic: /humanoid/head_pitch_controller/command
+
+vision_pose_provider:
+  robot_model: robot1
+  ball_model: soccer_ball
+  goal_x: 4.5
+  goal_y: 0.0
+  publish_rate: 20.0
+  joint_state_topic: /humanoid/joint_states
+  detection_timeout: 0.5
+  model_timeout: 1.0
+  joint_timeout: 1.0
+  horizontal_fov: 1.047
+  image_width: 640.0
+  image_height: 480.0
+  camera_x: 0.055
+  camera_y: 0.0
+  camera_z: 0.43
+  ball_center_z: 0.085
+  max_ball_distance: 8.0
+  default_head_pitch: 0.45
+  pause_on_score: true
+  score_distance: 0.18
+  score_pause_delay: 0.5
+  reset_ball_x: 1.2
+  reset_ball_y: 0.0
+  reset_ball_z: 0.085
+
+soccer_demo_node:
+  rate_hz: 10.0
+  ball_timeout: 0.7
+  search_angular_z: 0.25
+  center_tolerance: 0.10
+  center_gain: 0.9
+  bearing_gain: 1.0
+  max_turn_speed: 0.45
+  approach_distance: 0.75
+  dribble_distance: 0.28
+  shoot_distance: 0.18
+  approach_speed: 0.15
+  dribble_speed: 0.09
+  shoot_speed: 0.22
+  recover_time: 1.0
+
+yolo_detector_node:
+  model_path: "$(find robot_soccer_integrated_demo)/models/yolo11n.pt"
+  confidence: 0.10
+  imgsz: 320
+  target_class: sports ball
+  publish_rate_limit: 2.0
+  accept_any_ball_class: true
+  debug_all_classes: true
+  publish_debug_image: true
+  fallback_color_circle: true
+  fallback_hsv_lower: [5, 80, 80]
+  fallback_hsv_upper: [30, 255, 255]
+  fallback_min_radius: 4
+  fallback_max_radius: 80
+
+hough_circle_detector_node:
+  publish_rate_limit: 15.0
+  hsv_lower: [5, 80, 80]
+  hsv_upper: [30, 255, 255]
+  blur_kernel: 7
+  dp: 1.2
+  min_dist: 30.0
+  param1: 80.0
+  param2: 12.0
+  min_radius: 4
+  max_radius: 80
+  publish_debug_image: true

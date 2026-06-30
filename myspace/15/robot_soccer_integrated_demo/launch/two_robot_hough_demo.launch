@@ -1,0 +1,100 @@
+<launch>
+  <arg name="paused" default="false"/>
+  <arg name="gui" default="true"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find robot_soccer_integrated_demo)/worlds/soccer_field.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+  <group ns="robot1">
+    <param name="robot_description"
+           command="$(find xacro)/xacro $(find robot_soccer_integrated_demo)/urdf/humanoid_soccer.urdf control_ns:=/robot1/humanoid camera_ns:=/robot1 robot_param:=/robot1/robot_description"/>
+    <rosparam file="$(find robot_soccer_integrated_demo)/config/controllers_walk.yaml" command="load"/>
+    <rosparam file="$(find robot_soccer_integrated_demo)/config/demo_params.yaml" command="load"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+      <param name="publish_frequency" value="50.0"/>
+      <param name="tf_prefix" value="robot1"/>
+      <remap from="joint_states" to="humanoid/joint_states"/>
+    </node>
+
+    <node name="robot_spawner" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-urdf -model robot1 -param /robot1/robot_description -x 0.0 -y 0.0 -z 0.01 -Y 0.0"/>
+
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen"
+          launch-prefix="bash -c 'sleep 3; exec $0 $@'"
+          args="--namespace=/robot1/humanoid joint_state_controller position_controller head_yaw_controller head_pitch_controller --timeout 120"/>
+
+    <node name="cmd_vel_adapter" pkg="robot_soccer_integrated_demo" type="cmd_vel_adapter.py" output="screen"
+          launch-prefix="bash -c 'sleep 6; exec $0 $@'">
+      <param name="command_topic" value="/robot1/humanoid/position_controller/command"/>
+      <param name="robot_model" value="robot1"/>
+    </node>
+
+    <node name="head_pitch_controller" pkg="robot_soccer_integrated_demo" type="head_pitch_controller.py" output="screen"
+          launch-prefix="bash -c 'sleep 6; exec $0 $@'">
+      <param name="yaw_command_topic" value="/robot1/humanoid/head_yaw_controller/command"/>
+      <param name="pitch_command_topic" value="/robot1/humanoid/head_pitch_controller/command"/>
+    </node>
+
+    <node name="hough_circle_detector_node" pkg="robot_soccer_integrated_demo" type="hough_circle_detector_node.py" output="screen"
+          launch-prefix="bash -c 'sleep 7; exec $0 $@'"/>
+
+    <node name="vision_pose_provider" pkg="robot_soccer_integrated_demo" type="vision_pose_provider.py" output="screen"
+          launch-prefix="bash -c 'sleep 7; exec $0 $@'">
+      <param name="robot_model" value="robot1"/>
+      <param name="joint_state_topic" value="/robot1/humanoid/joint_states"/>
+      <param name="reset_robot_x" value="0.0"/>
+      <param name="reset_robot_y" value="0.0"/>
+      <param name="reset_robot_z" value="0.0"/>
+    </node>
+
+    <node name="soccer_demo_node" pkg="robot_soccer_integrated_demo" type="soccer_demo_node.py" output="screen"
+          launch-prefix="bash -c 'sleep 8; exec $0 $@'"/>
+  </group>
+
+  <group ns="robot2">
+    <param name="robot_description"
+           command="$(find xacro)/xacro $(find robot_soccer_integrated_demo)/urdf/humanoid_soccer.urdf control_ns:=/robot2/humanoid camera_ns:=/robot2 robot_param:=/robot2/robot_description"/>
+    <rosparam file="$(find robot_soccer_integrated_demo)/config/controllers_walk.yaml" command="load"/>
+    <rosparam file="$(find robot_soccer_integrated_demo)/config/demo_params.yaml" command="load"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+      <param name="publish_frequency" value="50.0"/>
+      <param name="tf_prefix" value="robot2"/>
+      <remap from="joint_states" to="humanoid/joint_states"/>
+    </node>
+
+    <node name="robot_spawner" pkg="gazebo_ros" type="spawn_model" output="screen"
+          launch-prefix="bash -c 'sleep 2; exec $0 $@'"
+          args="-urdf -model robot2 -param /robot2/robot_description -x 3.8 -y 0.0 -z 0.01 -Y 3.14159"/>
+
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen"
+          launch-prefix="bash -c 'sleep 5; exec $0 $@'"
+          args="--namespace=/robot2/humanoid joint_state_controller position_controller head_yaw_controller head_pitch_controller --timeout 120"/>
+
+    <node name="cmd_vel_adapter" pkg="robot_soccer_integrated_demo" type="cmd_vel_adapter.py" output="screen"
+          launch-prefix="bash -c 'sleep 7; exec $0 $@'">
+      <param name="command_topic" value="/robot2/humanoid/position_controller/command"/>
+      <param name="robot_model" value="robot2"/>
+    </node>
+
+    <node name="head_pitch_controller" pkg="robot_soccer_integrated_demo" type="head_pitch_controller.py" output="screen"
+          launch-prefix="bash -c 'sleep 7; exec $0 $@'">
+      <param name="yaw_command_topic" value="/robot2/humanoid/head_yaw_controller/command"/>
+      <param name="pitch_command_topic" value="/robot2/humanoid/head_pitch_controller/command"/>
+    </node>
+
+    <node name="goalie_node" pkg="robot_soccer_integrated_demo" type="goalie_node.py" output="screen"
+          launch-prefix="bash -c 'sleep 8; exec $0 $@'">
+      <param name="robot_model" value="robot2"/>
+      <param name="home_x" value="3.8"/>
+      <param name="home_yaw" value="3.14159"/>
+      <param name="min_y" value="-1.3"/>
+      <param name="max_y" value="1.3"/>
+    </node>
+  </group>
+</launch>

@@ -1,0 +1,8 @@
+<launch>
+  <group ns="robot1">
+    <rosparam file="$(find robot_soccer_integrated_demo)/config/demo_params.yaml" command="load"/>
+    <node name="vision_pose_provider" pkg="robot_soccer_integrated_demo" type="vision_pose_provider.py" output="screen"/>
+    <node name="soccer_demo_node" pkg="robot_soccer_integrated_demo" type="soccer_demo_node.py" output="screen"/>
+    <node name="hough_circle_detector_node" pkg="robot_soccer_integrated_demo" type="hough_circle_detector_node.py" output="screen"/>
+  </group>
+</launch>

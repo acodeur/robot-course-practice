@@ -1,0 +1,39 @@
+<launch>
+  <arg name="paused" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="robot_model" default="robot1"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find robot_soccer_integrated_demo)/worlds/soccer_field.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+  <param name="robot_description"
+         command="$(find xacro)/xacro $(find robot_soccer_integrated_demo)/urdf/humanoid_soccer.urdf control_ns:=/humanoid camera_ns:=/robot1 robot_param:=/robot_description"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+    <param name="publish_frequency" value="50.0"/>
+    <remap from="joint_states" to="/humanoid/joint_states"/>
+  </node>
+
+  <rosparam file="$(find robot_soccer_integrated_demo)/config/controllers_walk.yaml" command="load"/>
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen"
+        args="--namespace=/humanoid joint_state_controller position_controller head_yaw_controller head_pitch_controller --timeout 120"/>
+
+  <node name="robot_spawner" pkg="gazebo_ros" type="spawn_model" output="screen"
+        args="-urdf -model $(arg robot_model) -param /robot_description -x 0.0 -y 0.0 -z 0.01 -Y 0.0"/>
+
+  <group ns="robot1">
+    <rosparam file="$(find robot_soccer_integrated_demo)/config/demo_params.yaml" command="load"/>
+
+    <node name="cmd_vel_adapter" pkg="robot_soccer_integrated_demo" type="cmd_vel_adapter.py" output="screen">
+      <param name="command_topic" value="/humanoid/position_controller/command"/>
+      <param name="robot_model" value="$(arg robot_model)"/>
+    </node>
+
+    <node name="head_pitch_controller" pkg="robot_soccer_integrated_demo" type="head_pitch_controller.py" output="screen"/>
+  </group>
+</launch>
