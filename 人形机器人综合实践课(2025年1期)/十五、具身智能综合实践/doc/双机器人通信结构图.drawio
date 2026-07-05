@@ -1,0 +1,128 @@
+<mxfile host="app.diagrams.net" agent="5.0">
+  <diagram id="diagram1" name="Page-1">
+    <mxGraphModel dx="1365" dy="-26" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1200" pageHeight="800" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="3R9he03GFxcxLLgjmTqh-46" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=13;align=center;verticalAlign=top;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;命名空间：/robot2" vertex="1">
+          <mxGeometry height="620" width="330" x="795" y="1070" as="geometry" />
+        </mxCell>
+        <mxCell id="keynote" parent="1" style="text;html=1;strokeColor=#d6b656;fillColor=#fff2cc;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=11;fontColor=#333;rounded=1;spacing=6;" value="关键点: 两台机器人各自拥有独立命名空间，局部话题名如 cmd_vel、goalie_state、decision_state 不会互相覆盖；Gazebo 模型状态作为共享全局信息，由不同节点按 robot1_model 参数读取自己需要的模型。" vertex="1">
+          <mxGeometry height="60" width="1000" x="475" y="1830" as="geometry" />
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;" value="Gazebo 足球场" vertex="1">
+          <mxGeometry height="60" width="200" x="635" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=13;align=center;verticalAlign=top;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;命名空间：/robot1" vertex="1">
+          <mxGeometry height="620" width="330" x="350" y="1070" as="geometry" />
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="相机" vertex="1">
+          <mxGeometry height="50" width="140" x="445" y="1145" as="geometry" />
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="Hough 检测" vertex="1">
+          <mxGeometry height="50" width="140" x="445" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="位姿估计" vertex="1">
+          <mxGeometry height="50" width="140" x="445" y="1370" as="geometry" />
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="FSM 决策" vertex="1">
+          <mxGeometry height="50" width="140" x="445" y="1485" as="geometry" />
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="速度适配与步态&lt;div&gt;&lt;span style=&quot;color: rgb(85, 85, 85); font-size: 10px; font-style: italic;&quot;&gt;驱动robot1运动&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="140" x="445" y="1595" as="geometry" />
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="速度适配与步态&lt;div&gt;&lt;span style=&quot;color: rgb(85, 85, 85); font-size: 10px; font-style: italic;&quot;&gt;驱动robot2运动&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="140" x="905" y="1485" as="geometry" />
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-31" edge="1" parent="1" source="3R9he03GFxcxLLgjmTqh-3" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="3R9he03GFxcxLLgjmTqh-5" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="555" y="1515" as="sourcePoint" />
+            <mxPoint x="605" y="1465" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-32" connectable="0" parent="3R9he03GFxcxLLgjmTqh-31" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;span style=&quot;color: rgb(85, 85, 85); font-size: 10px; font-style: italic; white-space: normal;&quot;&gt;/robot1/camera/image_raw&lt;/span&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.0941" y="2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-33" edge="1" parent="1" source="3R9he03GFxcxLLgjmTqh-5" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="3R9he03GFxcxLLgjmTqh-7" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points" />
+            <mxPoint x="425" y="1515" as="sourcePoint" />
+            <mxPoint x="475" y="1465" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-34" connectable="0" parent="3R9he03GFxcxLLgjmTqh-33" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;span style=&quot;color: rgb(85, 85, 85); font-size: 10px; font-style: italic; white-space: normal;&quot;&gt;/robot1/vision/detections&lt;/span&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.1095" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-35" edge="1" parent="1" source="3R9he03GFxcxLLgjmTqh-7" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="3R9he03GFxcxLLgjmTqh-9" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="425" y="1515" as="sourcePoint" />
+            <mxPoint x="475" y="1465" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-37" connectable="0" parent="3R9he03GFxcxLLgjmTqh-35" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;span&gt;&lt;span style=&quot;color: rgb(85, 85, 85); font-size: 10px; font-style: italic; white-space: normal;&quot;&gt;/robot1/ball_pose&lt;/span&gt;&lt;br style=&quot;color: rgb(85, 85, 85); font-size: 10px; font-style: italic; white-space: normal;&quot;&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(85, 85, 85); font-size: 10px; font-style: italic; white-space: normal;&quot;&gt;/robot1/goal_pose&lt;/span&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.0643" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-38" edge="1" parent="1" source="3R9he03GFxcxLLgjmTqh-9" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="3R9he03GFxcxLLgjmTqh-11" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="425" y="1635" as="sourcePoint" />
+            <mxPoint x="475" y="1585" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-39" connectable="0" parent="3R9he03GFxcxLLgjmTqh-38" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;span&gt;&lt;span&gt;&lt;span style=&quot;color: rgb(85, 85, 85); font-size: 10px; font-style: italic; white-space: normal;&quot;&gt;/robot1/decision_state&lt;/span&gt;&lt;br style=&quot;color: rgb(85, 85, 85); font-size: 10px; font-style: italic; white-space: normal;&quot;&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(85, 85, 85); font-size: 10px; font-style: italic; white-space: normal;&quot;&gt;/robot1/cmd_vel&lt;/span&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.0235" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-42" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="守门决策" vertex="1">
+          <mxGeometry height="50" width="140" x="905" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-43" edge="1" parent="1" source="3R9he03GFxcxLLgjmTqh-42" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="3R9he03GFxcxLLgjmTqh-24" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="815" y="1410" as="sourcePoint" />
+            <mxPoint x="865" y="1360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-44" connectable="0" parent="3R9he03GFxcxLLgjmTqh-43" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;span style=&quot;color: rgb(85, 85, 85); font-size: 10px; font-style: italic; white-space: normal;&quot;&gt;/robot2/goalie_state&lt;br&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(85, 85, 85);&quot;&gt;&lt;span style=&quot;color: rgb(85, 85, 85); font-size: 10px; font-style: italic; white-space: normal; background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;/robot2/&lt;/span&gt;&lt;font color=&quot;#555555&quot;&gt;&lt;span style=&quot;font-size: 10px; text-wrap-mode: wrap;&quot;&gt;&lt;i&gt;cmd_vel&lt;/i&gt;&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.0542" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-47" edge="1" parent="1" source="3R9he03GFxcxLLgjmTqh-1" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;dashed=1;" target="3R9he03GFxcxLLgjmTqh-7" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="685" y="1170" as="sourcePoint" />
+            <mxPoint x="735" y="1120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-48" connectable="0" parent="3R9he03GFxcxLLgjmTqh-47" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;span style=&quot;color: rgb(85, 85, 85); font-size: 10px; font-style: italic; white-space: normal;&quot;&gt;&amp;nbsp;/gazebo/model_states&lt;/span&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.1888" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-49" edge="1" parent="1" source="3R9he03GFxcxLLgjmTqh-1" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;dashed=1;" target="3R9he03GFxcxLLgjmTqh-42" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="575" y="1220" as="sourcePoint" />
+            <mxPoint x="625" y="1170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-50" edge="1" parent="1" source="3R9he03GFxcxLLgjmTqh-1" style="endArrow=classic;html=1;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" target="3R9he03GFxcxLLgjmTqh-2" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="575" y="1220" as="sourcePoint" />
+            <mxPoint x="625" y="1170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3R9he03GFxcxLLgjmTqh-51" edge="1" parent="1" source="3R9he03GFxcxLLgjmTqh-1" style="endArrow=classic;html=1;rounded=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" target="3R9he03GFxcxLLgjmTqh-46" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="575" y="1220" as="sourcePoint" />
+            <mxPoint x="625" y="1170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
