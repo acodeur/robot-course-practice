@@ -4,404 +4,421 @@
     <variable type="" id="^vr9LPnb.@X*s#Gk^TiG">温度值</variable>
     <variable type="" id="tv!9UD)u,f:.[e-4l0wP">数值</variable>
   </variables>
-  <block type="aelos_while" id="bnh^gBCdM;G$yy((]4s_" x="-72" y="-481">
+  <block type="aelos_while" id="U3/3bI#Gd=.F0fK./8?O" x="-350" y="-602">
     <value name="condition">
-      <block type="logic_boolean" id="6s.Tu5D4,$[e115jg;@A">
+      <block type="logic_boolean" id="n4WlGCzvol~4=8#nh)/l">
         <field name="BOOL">TRUE</field>
       </block>
     </value>
     <statement name="do">
-      <block type="remote_control" id="uTmuYp2ssmFg`s|r0,Ad">
-        <value name="variable">
-          <block type="variables_get" id="}tmNs3MaLw|k_$@6cXZ~">
-            <field name="VAR" id="b+}@DbgwGY%Qg3%`:53D" variabletype="">手柄按键值</field>
+      <block type="io_out" id="LID]JuR6772/`!7jV!%g">
+        <field name="output_value">0</field>
+        <field name="port">2</field>
+      </block>
+    </statement>
+  </block>
+  <block type="start" id="!JODDDpDPuBO86x3{r0}" deletable="false" x="-436" y="-381">
+    <statement name="do">
+      <block type="aelos_while" id="bnh^gBCdM;G$yy((]4s_">
+        <value name="condition">
+          <block type="logic_boolean" id="6s.Tu5D4,$[e115jg;@A">
+            <field name="BOOL">TRUE</field>
           </block>
         </value>
-        <next>
-          <block type="aelos_if" id=",fZ~y?LenD/G2=836?h*">
-            <value name="condition">
-              <block type="aelos_compare" id="D410=zf5h9@@zyhvtJ^W">
-                <field name="OP">JNE</field>
-                <value name="input_1">
-                  <block type="variables_get" id="V%9u=9|OYHo{}vi06R0Y">
-                    <field name="VAR" id="b+}@DbgwGY%Qg3%`:53D" variabletype="">手柄按键值</field>
-                  </block>
-                </value>
-                <value name="input_2">
-                  <block type="remote_control_button" id="4|FpaipPXT@uMugOcW.{">
-                    <field name="mode">Perform</field>
-                    <field name="key">2</field>
-                  </block>
-                </value>
+        <statement name="do">
+          <block type="remote_control" id="uTmuYp2ssmFg`s|r0,Ad">
+            <value name="variable">
+              <block type="variables_get" id="}tmNs3MaLw|k_$@6cXZ~">
+                <field name="VAR" id="b+}@DbgwGY%Qg3%`:53D" variabletype="">手柄按键值</field>
               </block>
             </value>
-            <statement name="do">
-              <block type="sensor" id="AzM=oEMdF^fOo7X{%=Cq">
-                <field name="port">1</field>
-                <value name="variable">
-                  <block type="variables_get" id="ePBX%=NvRh${D4Y}AG,X">
-                    <field name="VAR" id="^vr9LPnb.@X*s#Gk^TiG" variabletype="">温度值</field>
+            <next>
+              <block type="aelos_if" id=",fZ~y?LenD/G2=836?h*">
+                <value name="condition">
+                  <block type="aelos_compare" id="D410=zf5h9@@zyhvtJ^W">
+                    <field name="OP">JNE</field>
+                    <value name="input_1">
+                      <block type="variables_get" id="V%9u=9|OYHo{}vi06R0Y">
+                        <field name="VAR" id="b+}@DbgwGY%Qg3%`:53D" variabletype="">手柄按键值</field>
+                      </block>
+                    </value>
+                    <value name="input_2">
+                      <block type="remote_control_button" id="4|FpaipPXT@uMugOcW.{">
+                        <field name="mode">Perform</field>
+                        <field name="key">2</field>
+                      </block>
+                    </value>
                   </block>
                 </value>
-                <next>
-                  <block type="music" id="h1*#M:.4*VTS;vOV|eY}">
-                    <field name="music_name">当前温度为</field>
+                <statement name="do">
+                  <block type="sensor" id="AzM=oEMdF^fOo7X{%=Cq">
+                    <field name="port">1</field>
+                    <value name="variable">
+                      <block type="variables_get" id="ePBX%=NvRh${D4Y}AG,X">
+                        <field name="VAR" id="^vr9LPnb.@X*s#Gk^TiG" variabletype="">温度值</field>
+                      </block>
+                    </value>
                     <next>
-                      <block type="variables_set" id="*jKO0XBTbZ/!Go;{%2KC">
-                        <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
-                        <value name="VALUE">
-                          <block type="math_round" id="Us}HRvSs?r5]{L4z)2}H">
-                            <field name="OP">ROUNDDOWN</field>
-                            <value name="NUM">
-                              <shadow type="math_number" id=".ggshm+gX$FzO-E*3iXz">
-                                <field name="NUM">3.1</field>
-                              </shadow>
-                              <block type="math_arithmetic" id="-}D8s.iw|w7jur]MB+N]">
-                                <field name="OP">DIVIDE</field>
-                                <value name="A">
-                                  <shadow type="math_number" id="A2o|wC(j~*|M;h4=!9ga">
-                                    <field name="NUM">1</field>
-                                  </shadow>
-                                  <block type="variables_get" id="y@TqMv;v{8$PNXgK~vc!">
-                                    <field name="VAR" id="^vr9LPnb.@X*s#Gk^TiG" variabletype="">温度值</field>
-                                  </block>
-                                </value>
-                                <value name="B">
-                                  <shadow type="math_number" id="q|Johiqr%|m;+}[nvc{s">
-                                    <field name="NUM">10</field>
-                                  </shadow>
-                                </value>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
+                      <block type="music" id="h1*#M:.4*VTS;vOV|eY}">
+                        <field name="music_name">当前温度为</field>
                         <next>
-                          <block type="aelos_if" id="-X,p[abW-2lu@wz+g9sM">
-                            <value name="condition">
-                              <block type="aelos_compare" id="n[q~y%nMWl:W?zp9q$jt">
-                                <field name="OP">JNE</field>
-                                <value name="input_1">
-                                  <block type="variables_get" id="m=HzK7F@@e{z$0tT-I8E">
-                                    <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
-                                  </block>
-                                </value>
-                                <value name="input_2">
-                                  <block type="math_number" id=",C_kH0B[39|`YjJa~Ek8">
-                                    <field name="NUM">1</field>
+                          <block type="variables_set" id="*jKO0XBTbZ/!Go;{%2KC">
+                            <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
+                            <value name="VALUE">
+                              <block type="math_round" id="Us}HRvSs?r5]{L4z)2}H">
+                                <field name="OP">ROUNDDOWN</field>
+                                <value name="NUM">
+                                  <shadow type="math_number" id=".ggshm+gX$FzO-E*3iXz">
+                                    <field name="NUM">3.1</field>
+                                  </shadow>
+                                  <block type="math_arithmetic" id="-}D8s.iw|w7jur]MB+N]">
+                                    <field name="OP">DIVIDE</field>
+                                    <value name="A">
+                                      <shadow type="math_number" id="A2o|wC(j~*|M;h4=!9ga">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="variables_get" id="y@TqMv;v{8$PNXgK~vc!">
+                                        <field name="VAR" id="^vr9LPnb.@X*s#Gk^TiG" variabletype="">温度值</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <shadow type="math_number" id="q|Johiqr%|m;+}[nvc{s">
+                                        <field name="NUM">10</field>
+                                      </shadow>
+                                    </value>
                                   </block>
                                 </value>
                               </block>
                             </value>
-                            <statement name="do">
-                              <block type="music" id="[oY.$%_N7QS$3]C@HG14">
-                                <field name="music_name">1</field>
-                              </block>
-                            </statement>
                             <next>
-                              <block type="aelos_if" id="TOV2nZ,JrQJUr/@If]Wv">
+                              <block type="aelos_if" id="-X,p[abW-2lu@wz+g9sM">
                                 <value name="condition">
-                                  <block type="aelos_compare" id="+w$xkRTHs.a+o%BUe=^h">
+                                  <block type="aelos_compare" id="n[q~y%nMWl:W?zp9q$jt">
                                     <field name="OP">JNE</field>
                                     <value name="input_1">
-                                      <block type="variables_get" id="Msi662+pW#y!oxWNbf)8">
+                                      <block type="variables_get" id="m=HzK7F@@e{z$0tT-I8E">
                                         <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
                                       </block>
                                     </value>
                                     <value name="input_2">
-                                      <block type="math_number" id="m;$;DZ3Omip8[$_9IICL">
-                                        <field name="NUM">2</field>
+                                      <block type="math_number" id=",C_kH0B[39|`YjJa~Ek8">
+                                        <field name="NUM">1</field>
                                       </block>
                                     </value>
                                   </block>
                                 </value>
                                 <statement name="do">
-                                  <block type="music" id="Xu31=?4%XquKDGoSg@6c">
-                                    <field name="music_name">2</field>
+                                  <block type="music" id="[oY.$%_N7QS$3]C@HG14">
+                                    <field name="music_name">1</field>
                                   </block>
                                 </statement>
                                 <next>
-                                  <block type="aelos_if" id=".!)*RqP@-.-/xA$s/Pkf">
+                                  <block type="aelos_if" id="TOV2nZ,JrQJUr/@If]Wv">
                                     <value name="condition">
-                                      <block type="aelos_compare" id="{]EC07`]d4_d1:CQKC4R">
+                                      <block type="aelos_compare" id="+w$xkRTHs.a+o%BUe=^h">
                                         <field name="OP">JNE</field>
                                         <value name="input_1">
-                                          <block type="variables_get" id="CiOGM|m~V{)D.-TujrQz">
+                                          <block type="variables_get" id="Msi662+pW#y!oxWNbf)8">
                                             <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
                                           </block>
                                         </value>
                                         <value name="input_2">
-                                          <block type="math_number" id=".338y*Xa?P7t;/CEciKd">
-                                            <field name="NUM">3</field>
+                                          <block type="math_number" id="m;$;DZ3Omip8[$_9IICL">
+                                            <field name="NUM">2</field>
                                           </block>
                                         </value>
                                       </block>
                                     </value>
                                     <statement name="do">
-                                      <block type="music" id="(EbbCK()NM0^497UhqjS">
-                                        <field name="music_name">3</field>
-                                        <next>
-                                          <block type="io_out" id="_})`XRkSA};l@dZ[vH8#">
-                                            <field name="output_value">1</field>
-                                            <field name="port">2</field>
-                                          </block>
-                                        </next>
+                                      <block type="music" id="Xu31=?4%XquKDGoSg@6c">
+                                        <field name="music_name">2</field>
                                       </block>
                                     </statement>
                                     <next>
-                                      <block type="aelos_if" id="2AdVeakVu7}Gqpe5QQfJ">
+                                      <block type="aelos_if" id=".!)*RqP@-.-/xA$s/Pkf">
                                         <value name="condition">
-                                          <block type="aelos_compare" id=",qC:qt8qC0;)l1s1zHd1">
+                                          <block type="aelos_compare" id="{]EC07`]d4_d1:CQKC4R">
                                             <field name="OP">JNE</field>
                                             <value name="input_1">
-                                              <block type="variables_get" id="cz,J)/{wZAh:Vi1)xltr">
+                                              <block type="variables_get" id="CiOGM|m~V{)D.-TujrQz">
                                                 <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
                                               </block>
                                             </value>
                                             <value name="input_2">
-                                              <block type="math_number" id="u,Yx)b~xWL8EN4]N/ssJ">
-                                                <field name="NUM">4</field>
+                                              <block type="math_number" id=".338y*Xa?P7t;/CEciKd">
+                                                <field name="NUM">3</field>
                                               </block>
                                             </value>
                                           </block>
                                         </value>
                                         <statement name="do">
-                                          <block type="io_out" id="xD-mNf9:99NJA2/nv)Qu">
-                                            <field name="output_value">1</field>
-                                            <field name="port">2</field>
+                                          <block type="music" id="(EbbCK()NM0^497UhqjS">
+                                            <field name="music_name">3</field>
                                             <next>
-                                              <block type="music" id="~iiU?zmk}UP$_Z4=_w}G">
-                                                <field name="music_name">4</field>
+                                              <block type="io_out" id="_})`XRkSA};l@dZ[vH8#">
+                                                <field name="output_value">1</field>
+                                                <field name="port">2</field>
                                               </block>
                                             </next>
                                           </block>
                                         </statement>
                                         <next>
-                                          <block type="music" id="%%_9mU_~)9G};nq{~}#b">
-                                            <field name="music_name">10</field>
-                                            <next>
-                                              <block type="variables_set" id="Lut4(4Xw9Q~]fDzuJTi4">
-                                                <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
-                                                <value name="VALUE">
-                                                  <block type="math_modulo" id="U;5mSPuV_9!VWp{!KF?e">
-                                                    <value name="DIVIDEND">
-                                                      <shadow type="math_number" id="#OUDd=@4.t*LI9F)SvCv">
-                                                        <field name="NUM">64</field>
-                                                      </shadow>
-                                                      <block type="variables_get" id="h~8;4`)a|SXEIML$])(M">
-                                                        <field name="VAR" id="^vr9LPnb.@X*s#Gk^TiG" variabletype="">温度值</field>
-                                                      </block>
-                                                    </value>
-                                                    <value name="DIVISOR">
-                                                      <shadow type="math_number" id="oYTE9ksxuK{lpN?eR6Rb">
-                                                        <field name="NUM">10</field>
-                                                      </shadow>
-                                                    </value>
+                                          <block type="aelos_if" id="2AdVeakVu7}Gqpe5QQfJ">
+                                            <value name="condition">
+                                              <block type="aelos_compare" id=",qC:qt8qC0;)l1s1zHd1">
+                                                <field name="OP">JNE</field>
+                                                <value name="input_1">
+                                                  <block type="variables_get" id="cz,J)/{wZAh:Vi1)xltr">
+                                                    <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
                                                   </block>
                                                 </value>
+                                                <value name="input_2">
+                                                  <block type="math_number" id="u,Yx)b~xWL8EN4]N/ssJ">
+                                                    <field name="NUM">4</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="do">
+                                              <block type="io_out" id="xD-mNf9:99NJA2/nv)Qu">
+                                                <field name="output_value">1</field>
+                                                <field name="port">2</field>
                                                 <next>
-                                                  <block type="aelos_if" id="J8hTG-)eaLNOycs#InhD">
-                                                    <value name="condition">
-                                                      <block type="aelos_compare" id="p%+RDsrt0W_?WrTyV/bZ">
-                                                        <field name="OP">JNE</field>
-                                                        <value name="input_1">
-                                                          <block type="variables_get" id=";hufQY{ZndSsY/JEMJK#">
-                                                            <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
+                                                  <block type="music" id="~iiU?zmk}UP$_Z4=_w}G">
+                                                    <field name="music_name">4</field>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="music" id="%%_9mU_~)9G};nq{~}#b">
+                                                <field name="music_name">10</field>
+                                                <next>
+                                                  <block type="variables_set" id="Lut4(4Xw9Q~]fDzuJTi4">
+                                                    <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
+                                                    <value name="VALUE">
+                                                      <block type="math_modulo" id="U;5mSPuV_9!VWp{!KF?e">
+                                                        <value name="DIVIDEND">
+                                                          <shadow type="math_number" id="#OUDd=@4.t*LI9F)SvCv">
+                                                            <field name="NUM">64</field>
+                                                          </shadow>
+                                                          <block type="variables_get" id="h~8;4`)a|SXEIML$])(M">
+                                                            <field name="VAR" id="^vr9LPnb.@X*s#Gk^TiG" variabletype="">温度值</field>
                                                           </block>
                                                         </value>
-                                                        <value name="input_2">
-                                                          <block type="math_number" id="}7!pMsO5x4$9^a$@o|]/">
-                                                            <field name="NUM">1</field>
-                                                          </block>
+                                                        <value name="DIVISOR">
+                                                          <shadow type="math_number" id="oYTE9ksxuK{lpN?eR6Rb">
+                                                            <field name="NUM">10</field>
+                                                          </shadow>
                                                         </value>
                                                       </block>
                                                     </value>
-                                                    <statement name="do">
-                                                      <block type="music" id="5$?/aM$dUKJGyeJ).Se?">
-                                                        <field name="music_name">1</field>
-                                                      </block>
-                                                    </statement>
                                                     <next>
-                                                      <block type="aelos_if" id="cou()8j_tnk!4^~)m`dt">
+                                                      <block type="aelos_if" id="J8hTG-)eaLNOycs#InhD">
                                                         <value name="condition">
-                                                          <block type="aelos_compare" id="fCO0=~zAOyJtt(9W|#gE">
+                                                          <block type="aelos_compare" id="p%+RDsrt0W_?WrTyV/bZ">
                                                             <field name="OP">JNE</field>
                                                             <value name="input_1">
-                                                              <block type="variables_get" id="0zk_k59[+j8x?`FhnJJU">
+                                                              <block type="variables_get" id=";hufQY{ZndSsY/JEMJK#">
                                                                 <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
                                                               </block>
                                                             </value>
                                                             <value name="input_2">
-                                                              <block type="math_number" id="w+R;K)(la!!I0qXNxFb=">
-                                                                <field name="NUM">2</field>
+                                                              <block type="math_number" id="}7!pMsO5x4$9^a$@o|]/">
+                                                                <field name="NUM">1</field>
                                                               </block>
                                                             </value>
                                                           </block>
                                                         </value>
                                                         <statement name="do">
-                                                          <block type="music" id="a}2M3T5Bu.6[49|f~BvA">
-                                                            <field name="music_name">2</field>
+                                                          <block type="music" id="5$?/aM$dUKJGyeJ).Se?">
+                                                            <field name="music_name">1</field>
                                                           </block>
                                                         </statement>
                                                         <next>
-                                                          <block type="aelos_if" id="BNX~y0|:w-b7bpB~h3HZ">
+                                                          <block type="aelos_if" id="cou()8j_tnk!4^~)m`dt">
                                                             <value name="condition">
-                                                              <block type="aelos_compare" id="OgdRMAn)uwvG^L-_@gnU">
+                                                              <block type="aelos_compare" id="fCO0=~zAOyJtt(9W|#gE">
                                                                 <field name="OP">JNE</field>
                                                                 <value name="input_1">
-                                                                  <block type="variables_get" id="Z(28ne{D:!WCxqZYvdPr">
+                                                                  <block type="variables_get" id="0zk_k59[+j8x?`FhnJJU">
                                                                     <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
                                                                   </block>
                                                                 </value>
                                                                 <value name="input_2">
-                                                                  <block type="math_number" id="[]Y:i^hZa,BPoT5k#JaL">
-                                                                    <field name="NUM">3</field>
+                                                                  <block type="math_number" id="w+R;K)(la!!I0qXNxFb=">
+                                                                    <field name="NUM">2</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
                                                             </value>
                                                             <statement name="do">
-                                                              <block type="music" id="@3H`yBWa@.Sl1[W^M}c*">
-                                                                <field name="music_name">3</field>
+                                                              <block type="music" id="a}2M3T5Bu.6[49|f~BvA">
+                                                                <field name="music_name">2</field>
                                                               </block>
                                                             </statement>
                                                             <next>
-                                                              <block type="aelos_if" id="lXqiYXN!_*/OAQ9oMu3F">
+                                                              <block type="aelos_if" id="BNX~y0|:w-b7bpB~h3HZ">
                                                                 <value name="condition">
-                                                                  <block type="aelos_compare" id="1-J`hb|Ry#d`.@~LO7|`">
+                                                                  <block type="aelos_compare" id="OgdRMAn)uwvG^L-_@gnU">
                                                                     <field name="OP">JNE</field>
                                                                     <value name="input_1">
-                                                                      <block type="variables_get" id="8I[@v2XH|y{Z_;NG?yoE">
+                                                                      <block type="variables_get" id="Z(28ne{D:!WCxqZYvdPr">
                                                                         <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
                                                                       </block>
                                                                     </value>
                                                                     <value name="input_2">
-                                                                      <block type="math_number" id="{?P%ear%bwn}TK$vqKh)">
-                                                                        <field name="NUM">4</field>
+                                                                      <block type="math_number" id="[]Y:i^hZa,BPoT5k#JaL">
+                                                                        <field name="NUM">3</field>
                                                                       </block>
                                                                     </value>
                                                                   </block>
                                                                 </value>
                                                                 <statement name="do">
-                                                                  <block type="music" id="},3=Ho=:|9DD)~P-ARt;">
-                                                                    <field name="music_name">4</field>
+                                                                  <block type="music" id="@3H`yBWa@.Sl1[W^M}c*">
+                                                                    <field name="music_name">3</field>
                                                                   </block>
                                                                 </statement>
                                                                 <next>
-                                                                  <block type="aelos_if" id="Cw=tl`u)RD$e`nltSscv">
+                                                                  <block type="aelos_if" id="lXqiYXN!_*/OAQ9oMu3F">
                                                                     <value name="condition">
-                                                                      <block type="aelos_compare" id="!b,jrLn={az*-6e#IN7E">
+                                                                      <block type="aelos_compare" id="1-J`hb|Ry#d`.@~LO7|`">
                                                                         <field name="OP">JNE</field>
                                                                         <value name="input_1">
-                                                                          <block type="variables_get" id="megwbzZPb;=O|~?.M~}V">
+                                                                          <block type="variables_get" id="8I[@v2XH|y{Z_;NG?yoE">
                                                                             <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
                                                                           </block>
                                                                         </value>
                                                                         <value name="input_2">
-                                                                          <block type="math_number" id="HDcE=`hP2{~7#[5xbV!,">
-                                                                            <field name="NUM">5</field>
+                                                                          <block type="math_number" id="{?P%ear%bwn}TK$vqKh)">
+                                                                            <field name="NUM">4</field>
                                                                           </block>
                                                                         </value>
                                                                       </block>
                                                                     </value>
                                                                     <statement name="do">
-                                                                      <block type="music" id="U436p$Lr3QHG%HHH8I#w">
-                                                                        <field name="music_name">5</field>
+                                                                      <block type="music" id="},3=Ho=:|9DD)~P-ARt;">
+                                                                        <field name="music_name">4</field>
                                                                       </block>
                                                                     </statement>
                                                                     <next>
-                                                                      <block type="aelos_if" id="lu7Js|P2:5r4y;VX]*WY">
+                                                                      <block type="aelos_if" id="Cw=tl`u)RD$e`nltSscv">
                                                                         <value name="condition">
-                                                                          <block type="aelos_compare" id="{?#i,O:l(9;mi||~`{gu">
+                                                                          <block type="aelos_compare" id="!b,jrLn={az*-6e#IN7E">
                                                                             <field name="OP">JNE</field>
                                                                             <value name="input_1">
-                                                                              <block type="variables_get" id="%Rx{pnpb2fZsH}5V(CtJ">
+                                                                              <block type="variables_get" id="megwbzZPb;=O|~?.M~}V">
                                                                                 <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
                                                                               </block>
                                                                             </value>
                                                                             <value name="input_2">
-                                                                              <block type="math_number" id="Hk3y.~Vw{nD|~S|U0V+y">
-                                                                                <field name="NUM">6</field>
+                                                                              <block type="math_number" id="HDcE=`hP2{~7#[5xbV!,">
+                                                                                <field name="NUM">5</field>
                                                                               </block>
                                                                             </value>
                                                                           </block>
                                                                         </value>
                                                                         <statement name="do">
-                                                                          <block type="music" id="1:hc8UnZ]rAP.N@{WAks">
-                                                                            <field name="music_name">6</field>
+                                                                          <block type="music" id="U436p$Lr3QHG%HHH8I#w">
+                                                                            <field name="music_name">5</field>
                                                                           </block>
                                                                         </statement>
                                                                         <next>
-                                                                          <block type="aelos_if" id="qh$V3P?.DR[X4cY=$OQk">
+                                                                          <block type="aelos_if" id="lu7Js|P2:5r4y;VX]*WY">
                                                                             <value name="condition">
-                                                                              <block type="aelos_compare" id="`6p`jjweBaaoeQAx1;_h">
+                                                                              <block type="aelos_compare" id="{?#i,O:l(9;mi||~`{gu">
                                                                                 <field name="OP">JNE</field>
                                                                                 <value name="input_1">
-                                                                                  <block type="variables_get" id="xlh{O48p4vSLj]1J/:KN">
+                                                                                  <block type="variables_get" id="%Rx{pnpb2fZsH}5V(CtJ">
                                                                                     <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
                                                                                   </block>
                                                                                 </value>
                                                                                 <value name="input_2">
-                                                                                  <block type="math_number" id="ogX6eb8j14F~b}hxohLV">
-                                                                                    <field name="NUM">7</field>
+                                                                                  <block type="math_number" id="Hk3y.~Vw{nD|~S|U0V+y">
+                                                                                    <field name="NUM">6</field>
                                                                                   </block>
                                                                                 </value>
                                                                               </block>
                                                                             </value>
                                                                             <statement name="do">
-                                                                              <block type="music" id="/0oKdetb}DJ+6FqobuF3">
-                                                                                <field name="music_name">7</field>
+                                                                              <block type="music" id="1:hc8UnZ]rAP.N@{WAks">
+                                                                                <field name="music_name">6</field>
                                                                               </block>
                                                                             </statement>
                                                                             <next>
-                                                                              <block type="aelos_if" id="aBbx4Ei!|.DO(s5z^~~_">
+                                                                              <block type="aelos_if" id="qh$V3P?.DR[X4cY=$OQk">
                                                                                 <value name="condition">
-                                                                                  <block type="aelos_compare" id="lD;6CqPgJw]u`h[MSXJ}">
+                                                                                  <block type="aelos_compare" id="`6p`jjweBaaoeQAx1;_h">
                                                                                     <field name="OP">JNE</field>
                                                                                     <value name="input_1">
-                                                                                      <block type="variables_get" id="vnwPn{9{eDop[^u?SX*,">
+                                                                                      <block type="variables_get" id="xlh{O48p4vSLj]1J/:KN">
                                                                                         <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
                                                                                       </block>
                                                                                     </value>
                                                                                     <value name="input_2">
-                                                                                      <block type="math_number" id="..?nVp%mRaI--qt9?F--">
-                                                                                        <field name="NUM">8</field>
+                                                                                      <block type="math_number" id="ogX6eb8j14F~b}hxohLV">
+                                                                                        <field name="NUM">7</field>
                                                                                       </block>
                                                                                     </value>
                                                                                   </block>
                                                                                 </value>
                                                                                 <statement name="do">
-                                                                                  <block type="music" id="T4b1_e|x?Z$:Hyhe0tO{">
-                                                                                    <field name="music_name">8</field>
+                                                                                  <block type="music" id="/0oKdetb}DJ+6FqobuF3">
+                                                                                    <field name="music_name">7</field>
                                                                                   </block>
                                                                                 </statement>
                                                                                 <next>
-                                                                                  <block type="aelos_if" id="k!kJ)Ti[qyYO8[jRA48W">
+                                                                                  <block type="aelos_if" id="aBbx4Ei!|.DO(s5z^~~_">
                                                                                     <value name="condition">
-                                                                                      <block type="aelos_compare" id="hbC0,k^;zwK6F@wch;i}">
+                                                                                      <block type="aelos_compare" id="lD;6CqPgJw]u`h[MSXJ}">
                                                                                         <field name="OP">JNE</field>
                                                                                         <value name="input_1">
-                                                                                          <block type="variables_get" id="TCS3y~$8_UnG+D*[3s-l">
+                                                                                          <block type="variables_get" id="vnwPn{9{eDop[^u?SX*,">
                                                                                             <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
                                                                                           </block>
                                                                                         </value>
                                                                                         <value name="input_2">
-                                                                                          <block type="math_number" id="FfbJ@Q-y!$(Nqt2NRBfC">
-                                                                                            <field name="NUM">9</field>
+                                                                                          <block type="math_number" id="..?nVp%mRaI--qt9?F--">
+                                                                                            <field name="NUM">8</field>
                                                                                           </block>
                                                                                         </value>
                                                                                       </block>
                                                                                     </value>
                                                                                     <statement name="do">
-                                                                                      <block type="music" id="%p+a|24$1gd-6JuW(yRE">
-                                                                                        <field name="music_name">9</field>
+                                                                                      <block type="music" id="T4b1_e|x?Z$:Hyhe0tO{">
+                                                                                        <field name="music_name">8</field>
                                                                                       </block>
                                                                                     </statement>
                                                                                     <next>
-                                                                                      <block type="music" id=";S8iebgNqM`[Pi:)IS%K">
-                                                                                        <field name="music_name">摄氏度</field>
+                                                                                      <block type="aelos_if" id="k!kJ)Ti[qyYO8[jRA48W">
+                                                                                        <value name="condition">
+                                                                                          <block type="aelos_compare" id="hbC0,k^;zwK6F@wch;i}">
+                                                                                            <field name="OP">JNE</field>
+                                                                                            <value name="input_1">
+                                                                                              <block type="variables_get" id="TCS3y~$8_UnG+D*[3s-l">
+                                                                                                <field name="VAR" id="tv!9UD)u,f:.[e-4l0wP" variabletype="">数值</field>
+                                                                                              </block>
+                                                                                            </value>
+                                                                                            <value name="input_2">
+                                                                                              <block type="math_number" id="FfbJ@Q-y!$(Nqt2NRBfC">
+                                                                                                <field name="NUM">9</field>
+                                                                                              </block>
+                                                                                            </value>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <statement name="do">
+                                                                                          <block type="music" id="%p+a|24$1gd-6JuW(yRE">
+                                                                                            <field name="music_name">9</field>
+                                                                                          </block>
+                                                                                        </statement>
                                                                                         <next>
-                                                                                          <block type="delayed" id="M[;wu]Vp3~I6UL,l]5z=">
-                                                                                            <field name="time">5</field>
+                                                                                          <block type="music" id=";S8iebgNqM`[Pi:)IS%K">
+                                                                                            <field name="music_name">摄氏度</field>
+                                                                                            <next>
+                                                                                              <block type="delayed" id="M[;wu]Vp3~I6UL,l]5z=">
+                                                                                                <field name="time">5</field>
+                                                                                              </block>
+                                                                                            </next>
                                                                                           </block>
                                                                                         </next>
                                                                                       </block>
@@ -439,26 +456,9 @@
                       </block>
                     </next>
                   </block>
-                </next>
+                </statement>
               </block>
-            </statement>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
-  <block type="start" id="!JODDDpDPuBO86x3{r0}" deletable="false" x="-436" y="-381">
-    <statement name="do">
-      <block type="aelos_while" id="U3/3bI#Gd=.F0fK./8?O">
-        <value name="condition">
-          <block type="logic_boolean" id="n4WlGCzvol~4=8#nh)/l">
-            <field name="BOOL">TRUE</field>
-          </block>
-        </value>
-        <statement name="do">
-          <block type="io_out" id="LID]JuR6772/`!7jV!%g">
-            <field name="output_value">0</field>
-            <field name="port">2</field>
+            </next>
           </block>
         </statement>
       </block>
